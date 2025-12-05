@@ -9,6 +9,7 @@ import Error from "../src/pages/Error/Error";
 import DashboardLayout from "../src/layout/DashboardLayout/DashboardLayout";
 import DashboardHome from "../src/pages/Dashboard/DashboardHome/DashboardHome";
 import AddScholarship from "../src/pages/Dashboard/AddScholarship/AddScholarship";
+import AllScholarships from "../src/pages/Home/AllScholarships/AllScholarships";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path:"/all-scholarships",
+        Component: AllScholarships,
       },
       {
         path: "/login",

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from './../../../hooks/useAxiosSecure';
+import useAxiosSecure from "./../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddScholarship = () => {
   const {
@@ -10,15 +11,15 @@ const AddScholarship = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-    const { user } = useAuth();
-    const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const handleAddBtn = async (formData) => {
     // console.log('add form',formData);
     const formDataInfo = {
       scholarshipName: formData.scholarshipName,
       universityName: formData.universityName,
-      universityImage: formData.universityImage ,
+      universityImage: formData.universityImage,
       universityCountry: formData.universityCountry,
       universityCity: formData.universityCity,
       universityWorldRank: Number(formData.universityWorldRank),
@@ -30,8 +31,41 @@ const AddScholarship = () => {
       serviceCharge: Number(formData.serviceCharge),
       applicationDeadline: formData.applicationDeadline,
       Email: formData.postedUserEmail,
-      };
-     
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to add a new scholarship.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Add it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .post("/scholarships", formDataInfo)
+          .then((response) => {
+            if (response.data.insertedId) {
+              Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Scholarship Added Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              reset();
+            }
+          })
+          .catch((error) => {
+            console.error("Error adding scholarship:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "There was an issue adding the scholarship. Please try again.",
+            });
+          });
+      }
+    });
   };
 
   return (

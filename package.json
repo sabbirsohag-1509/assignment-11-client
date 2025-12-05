@@ -15,6 +15,7 @@
     "axios": "^1.13.2",
     "daisyui": "^5.5.5",
     "firebase": "^12.6.0",
+    "framer-motion": "^12.23.25",
     "icons": "^1.0.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
