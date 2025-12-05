@@ -97,7 +97,7 @@ const Scholarships = () => {
 
               {/* View Details */}
               <Link
-                //   to={`/scholarships/${item._id}`}
+                  to={`/scholarshipDetails/${item._id}`}
                 className="btn btn-primary w-full mt-3 rounded-lg"
               >
                 View Details

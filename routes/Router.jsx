@@ -10,6 +10,7 @@ import DashboardLayout from "../src/layout/DashboardLayout/DashboardLayout";
 import DashboardHome from "../src/pages/Dashboard/DashboardHome/DashboardHome";
 import AddScholarship from "../src/pages/Dashboard/AddScholarship/AddScholarship";
 import AllScholarships from "../src/pages/Home/AllScholarships/AllScholarships";
+import ScholarshipDetails from "../src/pages/ScholarshipDetails/ScholarshipDetails";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path:"/all-scholarships",
         Component: AllScholarships,
+      },
+      { 
+        path: "/scholarshipDetails/:id",
+        Component: ScholarshipDetails,
       },
       {
         path: "/login",

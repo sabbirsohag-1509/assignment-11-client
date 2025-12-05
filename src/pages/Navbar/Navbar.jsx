@@ -119,7 +119,7 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <Link to="/profile">Profile</Link>
+                    <Link to="/about-us">About Us</Link>
                   </li>
                   <div className="divider my-1"></div>
                   <li>

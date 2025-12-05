@@ -83,7 +83,7 @@ const AllScholarships = () => {
                   Application Fees: {item.applicationFees ? `$${item.applicationFees}` : "N/A"}
                 </p>
               </div>
-              <Link className="btn btn-primary w-full mt-3 rounded-lg">View Details</Link>
+              <Link  to={`/scholarshipDetails/${item._id}`} className="btn btn-primary w-full mt-3 rounded-lg">View Details</Link>
             </div>
           </motion.div>
         ))}
