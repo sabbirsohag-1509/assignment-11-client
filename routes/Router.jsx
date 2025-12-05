@@ -8,7 +8,7 @@ import PrivateRoute from "./../src/context/PrivateRoute/PrivateRoute";
 import Error from "../src/pages/Error/Error";
 import DashboardLayout from "../src/layout/DashboardLayout/DashboardLayout";
 import DashboardHome from "../src/pages/Dashboard/DashboardHome/DashboardHome";
-import AddNew from "../src/pages/Dashboard/AddNew/AddNew";
+import AddScholarship from "../src/pages/Dashboard/AddScholarship/AddScholarship";
 
 const router = createBrowserRouter([
   {
@@ -50,8 +50,8 @@ const router = createBrowserRouter([
         Component: DashboardHome, 
       },
       {
-        path: '/dashboard/add-new',
-        Component: AddNew,
+        path: '/dashboard/add-scholarship',
+        Component: AddScholarship,
       },
     ],
   },

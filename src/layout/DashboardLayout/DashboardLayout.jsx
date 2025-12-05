@@ -2,15 +2,13 @@ import React from "react";
 import { NavLink, Outlet } from "react-router";
 import {
   FiHome,
-  FiBarChart2,
-  FiFileText,
   FiPlusCircle,
   FiSettings,
   FiLogOut,
 } from "react-icons/fi";
 import Logo from "../../pages/Home/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
-import { MdDashboard } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
 
 const DashboardLayout = () => {
@@ -123,33 +121,17 @@ const DashboardLayout = () => {
               </li>
               {/* Dashboard */}
               <li>
-                <NavLink to="/dashboard" className={linkStyle} end>
-                  <MdDashboard size={18} />
-                  Dashboard
-                </NavLink>
-              </li>
-
-              {/* Analytics */}
-              <li>
-                <NavLink to="/dashboard/analytics" className={linkStyle} end>
-                  <FiBarChart2 size={18} />
-                  Analytics
-                </NavLink>
-              </li>
-
-              {/* Reports */}
-              <li>
-                <NavLink to="/dashboard/reports" className={linkStyle} end>
-                  <FiFileText size={18} />
-                  Reports
+                <NavLink to="/profile" className={linkStyle} end>
+                  <CgProfile size={18} />
+                  My Profile
                 </NavLink>
               </li>
 
               {/* Add New */}
               <li>
-                <NavLink to="/dashboard/add-new" className={linkStyle} end>
+                <NavLink to="/dashboard/add-scholarship" className={linkStyle} end>
                   <FiPlusCircle size={18} />
-                  Add New
+                  Add Scholarship
                 </NavLink>
               </li>
             </ul>
