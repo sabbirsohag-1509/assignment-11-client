@@ -31,6 +31,8 @@ const AddScholarship = () => {
       serviceCharge: Number(formData.serviceCharge),
       applicationDeadline: formData.applicationDeadline,
       Email: formData.postedUserEmail,
+      description: formData.description,
+      stipend: formData.stipend,
     };
     Swal.fire({
       title: "Are you sure?",
@@ -346,6 +348,32 @@ const AddScholarship = () => {
             )}
           </div>
         </div>
+        {/* Description and Stipend  */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="label">
+              <span className="label-text">Description</span>
+            </label>
+            <textarea
+              {...register("description")}
+              placeholder="Write a detailed description of the scholarship"
+              className="textarea textarea-bordered w-full"
+              rows={5}
+            ></textarea>
+          </div>
+          {/* stipend  */}
+          <div>
+            <label className="label">
+              <span className="label-text">Stipend</span>
+            </label>
+            <input
+              {...register("stipend")}
+              type="text"
+              placeholder="e.g. $800 per month or Full fund"
+              className="input input-bordered w-full"
+            />
+          </div>
+        </div>
 
         {/* Email */}
         <div>
@@ -357,8 +385,8 @@ const AddScholarship = () => {
             defaultValue={user.email}
             className="input input-bordered w-full"
             {...register("postedUserEmail", {
-              required: "Poster email is required",
-              pattern: { message: "Enter a valid email" },
+              required: "Student email is required",
+              pattern: { message: "Enter a valid email Please" },
             })}
           />
           {errors.postedUserEmail && (

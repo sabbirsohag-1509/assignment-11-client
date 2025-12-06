@@ -6,6 +6,8 @@ import { MdCategory, MdOutlineAccessTimeFilled } from "react-icons/md";
 import { HiReceiptPercent } from "react-icons/hi2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { GiWorld } from "react-icons/gi";
+import { TiPin } from "react-icons/ti";
 
 const ScholarshipDetails = () => {
   const { id } = useParams();
@@ -65,7 +67,7 @@ const ScholarshipDetails = () => {
             </span>
 
             <span className="flex items-center gap-2">
-              🌍 World Rank: <b>{scholarship.universityWorldRank}</b>
+              <GiWorld size={16} className="text-green-600"/> World Rank: <b>{scholarship.universityWorldRank}</b>
             </span>
           </div>
 
@@ -85,11 +87,11 @@ const ScholarshipDetails = () => {
             {scholarship.description || "No description available."}
           </p>
 
-          {/* Coverage Section */}
-          {scholarship.coverage && (
+          {/* stipend Section */}
+          {scholarship.stipend && (
             <div className="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h3 className="font-bold text-lg mb-2">📌 Stipend / Coverage:</h3>
-              <p className="text-gray-700">{scholarship.coverage}</p>
+              <h3 className="font-bold text-lg mb-2 flex items-center"><TiPin size={24} className="text-primary"/> Stipend :</h3>
+              <p className="text-gray-700">{scholarship.stipend}</p>
             </div>
           )}
 
@@ -97,7 +99,7 @@ const ScholarshipDetails = () => {
           <div className="mt-5">
             <Link to={`/checkout/${id}`}>
               <button className="btn btn-primary w-full text-lg font-semibold rounded-xl">
-                Apply for Scholarship 🎯
+                Apply for Scholarship
               </button>
             </Link>
           </div>
