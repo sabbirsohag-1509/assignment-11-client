@@ -11,6 +11,8 @@ import DashboardHome from "../src/pages/Dashboard/DashboardHome/DashboardHome";
 import AddScholarship from "../src/pages/Dashboard/AddScholarship/AddScholarship";
 import AllScholarships from "../src/pages/Home/AllScholarships/AllScholarships";
 import ScholarshipDetails from "../src/pages/ScholarshipDetails/ScholarshipDetails";
+import ManageScholarships from "../src/pages/Dashboard/ManageScholarships/ManageScholarships";
+import UpdateScholarship from "../src/pages/Dashboard/UpdateScholarship/UpdateScholarship";
 
 const router = createBrowserRouter([
   {
@@ -22,10 +24,10 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path:"/all-scholarships",
+        path: "/all-scholarships",
         Component: AllScholarships,
       },
-      { 
+      {
         path: "/scholarshipDetails/:id",
         Component: ScholarshipDetails,
       },
@@ -54,14 +56,22 @@ const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
-    children: [ 
+    children: [
       {
         index: true,
-        Component: DashboardHome, 
+        Component: DashboardHome,
       },
       {
-        path: '/dashboard/add-scholarship',
+        path: "/dashboard/add-scholarship",
         Component: AddScholarship,
+      },
+      {
+        path: "/dashboard/manage-scholarship",
+        Component: ManageScholarships,
+      },
+      {
+        path: "/dashboard/update-scholarship/:id",
+        Component: UpdateScholarship,
       },
     ],
   },

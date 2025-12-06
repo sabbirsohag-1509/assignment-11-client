@@ -37,7 +37,7 @@ const UniversitySlider = () => {
         grabCursor={true}
         loop={true}
         autoplay={{
-          delay: 1000,
+          delay: 500,
           disableOnInteraction: false,
         }}
         modules={[Autoplay]}

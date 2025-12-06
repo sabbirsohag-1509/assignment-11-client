@@ -106,7 +106,7 @@ const ScholarshipDetails = () => {
         </div>
       </div>
 
-      {/* ----------------- Reviews Section ------------------ */}
+      {/*Reviews Section*/}
       <div className="mt-10">
         <h2 className="text-2xl font-bold mb-4">Reviews ({reviews.length})</h2>
 

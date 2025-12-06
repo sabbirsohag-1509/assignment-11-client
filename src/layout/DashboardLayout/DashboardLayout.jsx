@@ -10,6 +10,7 @@ import Logo from "../../pages/Home/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
 import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
+import { MdOutlineManageHistory } from "react-icons/md";
 
 const DashboardLayout = () => {
   const { user, logOutInfo } = useAuth();
@@ -132,6 +133,14 @@ const DashboardLayout = () => {
                 <NavLink to="/dashboard/add-scholarship" className={linkStyle} end>
                   <FiPlusCircle size={18} />
                   Add Scholarship
+                </NavLink>
+              </li>
+
+              {/* Add New */}
+              <li>
+                <NavLink to="/dashboard/manage-scholarship" className={linkStyle} end>
+                  <MdOutlineManageHistory size={18}/>
+                  Manage Scholarships
                 </NavLink>
               </li>
             </ul>
