@@ -90,7 +90,7 @@ const AllScholarships = () => {
       </div>
 
       {/* Pagination Controls (DaisyUI) */}
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 mb-3">
         <ul className="btn-group">
           {/* Previous */}
           <button
