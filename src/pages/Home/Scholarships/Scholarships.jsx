@@ -27,6 +27,7 @@ const Scholarships = () => {
 
   return (
     <div>
+      {/* title  */}
       <div className="text-center my-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2">
           Featured <span className="text-primary">Scholarships</span>
@@ -97,7 +98,7 @@ const Scholarships = () => {
 
               {/* View Details */}
               <Link
-                  to={`/scholarshipDetails/${item._id}`}
+                to={`/scholarshipDetails/${item._id}`}
                 className="btn btn-primary w-full mt-3 rounded-lg"
               >
                 View Details

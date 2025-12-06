@@ -7,7 +7,7 @@ const Testimonials = () => {
       id: 1,
       name: "Emily Carter",
       role: "Scholarship Winner (USA)",
-      img: "https://i.ibb.co/2d1rjL0/user1.jpg",
+      img: "https://i.ibb.co.com/tTp2bqqy/emily-Carter.avif",
       comment:
         "ScholarStream helped me discover the perfect scholarship opportunity. The platform guided me step by step, provided all the essential details about each scholarship, and made the application process extremely smooth. I could focus on preparing my documents without any stress or confusion, saving me weeks of effort!",
     },
@@ -15,7 +15,7 @@ const Testimonials = () => {
       id: 2,
       name: "Micheal Ahmed",
       role: "Student (UK)",
-      img: "https://i.ibb.co/BcYx0LM/user2.jpg",
+      img: "https://i.ibb.co.com/VYsN6qSx/Michael.avif",
       comment:
         "I was overwhelmed with so many scholarship options, but ScholarStream made it easy. The detailed listings, accurate application deadlines, and clear instructions helped me apply confidently to multiple universities. Their platform is a game-changer for international students seeking financial aid.",
     },
@@ -23,7 +23,7 @@ const Testimonials = () => {
       id: 3,
       name: "Sophia Lee",
       role: "Scholarship Holder (Canada)",
-      img: "https://i.ibb.co/Fx0p1hS/user3.jpg",
+      img: "https://i.ibb.co.com/jPJGddmH/sophie-Lee.avif",
       comment:
         "Thanks to ScholarStream, I secured a fully funded scholarship to study abroad. The intuitive interface, instant notifications about new scholarships, and detailed university insights made the journey stress-free. Highly recommended for anyone serious about studying overseas.",
     },
@@ -31,7 +31,7 @@ const Testimonials = () => {
       id: 4,
       name: "Arman Hossain",
       role: "Graduate Student (Bangladesh)",
-      img: "https://i.ibb.co/5vF8qKp/user4.jpg",
+      img: "https://i.ibb.co.com/gMY6rS5C/arman.avif",
       comment:
         "ScholarStream’s search system is very detailed. I filtered scholarships by country, category, and funding type and finally found one that perfectly matched my profile. The step-by-step guidance and clear application instructions were incredibly helpful and saved me a lot of time.",
     },
@@ -39,7 +39,7 @@ const Testimonials = () => {
       id: 5,
       name: "Julia Martinez",
       role: "Research Scholar (Spain)",
-      img: "https://i.ibb.co/ZM8yPZ8/user5.jpg",
+      img: "https://i.ibb.co.com/xqtssKwr/Julia-Martinez.avif",
       comment:
         "I loved the transparency of ScholarStream. Each scholarship had accurate information about fees, deadlines, and coverage. The platform is trustworthy and user-friendly, allowing me to apply to multiple scholarships without any confusion. Truly a premium experience.",
     },
@@ -47,7 +47,7 @@ const Testimonials = () => {
       id: 6,
       name: "Daniel Kim",
       role: "International Student (South Korea)",
-      img: "https://i.ibb.co/3mTr6q9/user6.jpg",
+      img: "https://i.ibb.co.com/v4GcqPzH/daniel.avif",
       comment:
         "ScholarStream exceeded my expectations. The platform is fast, clean, and intuitive. From searching scholarships to understanding eligibility criteria, everything was simplified. The notifications about new opportunities ensured I never missed a chance. Highly effective!",
     },
@@ -55,6 +55,7 @@ const Testimonials = () => {
 
   return (
     <section className="my-20 px-4">
+      {/* title  */}
       <div className="text-center my-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2">
           Success <span className="text-primary">Stories</span>
@@ -81,7 +82,9 @@ const Testimonials = () => {
             className="p-6 rounded-xl shadow-2xl border border-white/20 backdrop-blur-md bg-white/20 hover:bg-white/30 cursor-pointer"
           >
             <FaQuoteLeft className="text-3xl text-primary mb-4" />
-            <p className="text-gray-600 mb-4 text-sm md:text-base">{r.comment}</p>
+            <p className="text-gray-600 mb-4 text-sm md:text-base">
+              {r.comment}
+            </p>
             <div className="flex items-center gap-4 mt-4">
               <img
                 src={r.img}
