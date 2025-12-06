@@ -97,7 +97,7 @@ const ScholarshipDetails = () => {
 
           {/* Apply Button */}
           <div className="mt-5">
-            <Link to={`/checkout/${id}`}>
+            <Link to={`/apply-scholarship/${scholarship._id}`}>
               <button className="btn btn-primary w-full text-lg font-semibold rounded-xl">
                 Apply for Scholarship
               </button>

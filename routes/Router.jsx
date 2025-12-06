@@ -13,6 +13,8 @@ import AllScholarships from "../src/pages/Home/AllScholarships/AllScholarships";
 import ScholarshipDetails from "../src/pages/ScholarshipDetails/ScholarshipDetails";
 import ManageScholarships from "../src/pages/Dashboard/ManageScholarships/ManageScholarships";
 import UpdateScholarship from "../src/pages/Dashboard/UpdateScholarship/UpdateScholarship";
+import MyApplications from "../src/pages/Dashboard/MyApplications/MyApplications";
+import ApplyScholarship from "../src/pages/ApplyScholarship/ApplyScholarship";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/scholarshipDetails/:id",
         Component: ScholarshipDetails,
+      },
+      {
+        path: "/apply-scholarship/:id",
+        Component: ApplyScholarship,
       },
       {
         path: "/login",
@@ -72,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/update-scholarship/:id",
         Component: UpdateScholarship,
+      },
+      {
+        path: "/dashboard/my-application",
+        Component: MyApplications,
       },
     ],
   },

@@ -11,6 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
 import { MdOutlineManageHistory } from "react-icons/md";
+import { FaAppStore } from "react-icons/fa";
 
 const DashboardLayout = () => {
   const { user, logOutInfo } = useAuth();
@@ -136,11 +137,18 @@ const DashboardLayout = () => {
                 </NavLink>
               </li>
 
-              {/* Add New */}
+              {/* Manage Scholarship */}
               <li>
                 <NavLink to="/dashboard/manage-scholarship" className={linkStyle} end>
                   <MdOutlineManageHistory size={18}/>
                   Manage Scholarships
+                </NavLink>
+              </li>
+              {/* My Application */}
+              <li>
+                <NavLink to="/dashboard/my-application" className={linkStyle} end>
+                  <FaAppStore size={18} />
+                  My Applications
                 </NavLink>
               </li>
             </ul>
