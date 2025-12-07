@@ -15,6 +15,9 @@ import ManageScholarships from "../src/pages/Dashboard/ManageScholarships/Manage
 import UpdateScholarship from "../src/pages/Dashboard/UpdateScholarship/UpdateScholarship";
 import MyApplications from "../src/pages/Dashboard/MyApplications/MyApplications";
 import ApplyScholarship from "../src/pages/ApplyScholarship/ApplyScholarship";
+import Payment from "../src/pages/Dashboard/Payment/Payment/Payment";
+import PaymentSuccess from "../src/pages/Dashboard/Payment/PaymentSuccess/PaymentSuccess";
+import PaymentFailed from "../src/pages/Dashboard/Payment/PaymentFailed/PaymentFailed";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,7 @@ const router = createBrowserRouter([
         path: "/apply-scholarship/:id",
         Component: ApplyScholarship,
       },
+
       {
         path: "/login",
         Component: Login,
@@ -83,6 +87,18 @@ const router = createBrowserRouter([
         path: "/dashboard/my-application",
         Component: MyApplications,
       },
+      {
+        path: "/dashboard/payment/:scholarshipId",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "/dashboard/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/dashboard/payment-cancelled",
+        element: <PaymentFailed></PaymentFailed>
+      }
     ],
   },
   {

@@ -4,12 +4,13 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
+import { Link } from "react-router";
 
 const MyApplications = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedApp, setSelectedApp] = useState(null);
-    const [reviewApp, setReviewApp] = useState(null);
-    const { user } = useAuth();
+  const [reviewApp, setReviewApp] = useState(null);
+  const { user } = useAuth();
 
   const {
     data: apps = [],
@@ -63,7 +64,7 @@ const MyApplications = () => {
         setReviewApp(null);
       }
     } catch (err) {
-        console.error("Review Submission Error:", err);
+      console.error("Review Submission Error:", err);
       Swal.fire("Error", "Failed to submit review", "error");
     }
   };
@@ -95,9 +96,7 @@ const MyApplications = () => {
             {apps.map((app) => (
               <tr key={app._id} className="hover:bg-gray-50">
                 <td>{app.universityName}</td>
-                <td>
-                  {app.address}
-                </td>
+                <td>{app.address}</td>
                 <td>{app.subjectCategory}</td>
                 <td>${app.applicationFees}</td>
 
@@ -141,17 +140,22 @@ const MyApplications = () => {
                   )}
 
                   {/* Pay — only pending + unpaid */}
-                  {app.applicationStatus === "pending" &&
-                    app.paymentStatus === "unpaid" && (
-                      <button
-                        className="btn btn-xs btn-primary"
-                        onClick={() =>
-                          (window.location.href = `/payment/${app._id}`)
-                        }
-                      >
-                        Pay
-                      </button>
-                    )}
+                  {app.applicationStatus === "pending" && (
+                    <>
+                      {app.paymentStatus === "unpaid" ? (
+                        <Link
+                          to={`/dashboard/payment/${app.scholarshipId}`}
+                          className="btn btn-xs btn-primary"
+                        >
+                          Pay
+                        </Link>
+                      ) : (
+                        <span className="btn btn-xs btn-success cursor-not-allowed">
+                          Paid
+                        </span>
+                      )}
+                    </>
+                  )}
 
                   {/* Delete — only pending */}
                   {app.applicationStatus === "pending" && (
@@ -205,10 +209,7 @@ const MyApplications = () => {
             </p>
 
             <div className="modal-action">
-              <button
-                className="btn"
-                onClick={() => setSelectedApp(null)}
-              >
+              <button className="btn" onClick={() => setSelectedApp(null)}>
                 Close
               </button>
             </div>
@@ -230,6 +231,7 @@ const MyApplications = () => {
                   name="rating"
                   min="1"
                   max="5"
+                  security="1"
                   className="input input-bordered w-full"
                   required
                 />
@@ -251,10 +253,7 @@ const MyApplications = () => {
             </form>
 
             <div className="modal-action">
-              <button
-                className="btn"
-                onClick={() => setReviewApp(null)}
-              >
+              <button className="btn" onClick={() => setReviewApp(null)}>
                 Close
               </button>
             </div>
