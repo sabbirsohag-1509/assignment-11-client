@@ -18,6 +18,7 @@ import ApplyScholarship from "../src/pages/ApplyScholarship/ApplyScholarship";
 import Payment from "../src/pages/Dashboard/Payment/Payment/Payment";
 import PaymentSuccess from "../src/pages/Dashboard/Payment/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "../src/pages/Dashboard/Payment/PaymentFailed/PaymentFailed";
+import ManageAppliedApplications from "../src/pages/Dashboard/ManageAppliedApplications/ManageAppliedApplications";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/payment-cancelled",
         element: <PaymentFailed></PaymentFailed>
+      },
+      {
+        path: "/dashboard/manage-applied-applications",
+        element: <ManageAppliedApplications></ManageAppliedApplications>
       }
     ],
   },

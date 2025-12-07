@@ -12,6 +12,7 @@ import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
 import { MdOutlineManageHistory } from "react-icons/md";
 import { FaAppStore } from "react-icons/fa";
+import { SiNginxproxymanager } from "react-icons/si";
 
 const DashboardLayout = () => {
   const { user, logOutInfo } = useAuth();
@@ -149,6 +150,13 @@ const DashboardLayout = () => {
                 <NavLink to="/dashboard/my-application" className={linkStyle} end>
                   <FaAppStore size={18} />
                   My Applications
+                </NavLink>
+              </li>
+              {/* Manage Applied Applications */}
+              <li>
+                <NavLink to="/dashboard/manage-applied-applications" className={linkStyle} end>
+                  <SiNginxproxymanager size={18}/>
+                  Manage Applied Applications
                 </NavLink>
               </li>
             </ul>

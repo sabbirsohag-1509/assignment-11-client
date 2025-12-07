@@ -24,7 +24,19 @@ const MyApplications = () => {
     },
   });
 
-  //DELETE
+
+
+
+
+
+  //update btnHandler
+
+  
+  
+
+
+
+  //DELETEbtnHandler
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -131,9 +143,7 @@ const MyApplications = () => {
                   {app.applicationStatus === "pending" && (
                     <button
                       className="btn btn-xs btn-warning"
-                      onClick={() =>
-                        (window.location.href = `/dashboard/edit-application/${app._id}`)
-                      }
+                      
                     >
                       Edit
                     </button>
