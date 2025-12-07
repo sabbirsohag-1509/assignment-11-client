@@ -145,7 +145,7 @@ const MyApplications = () => {
                       {app.paymentStatus === "unpaid" ? (
                         <Link
                           to={`/dashboard/payment/${app.scholarshipId}`}
-                          className="btn btn-xs btn-primary"
+                          className="btn btn-xs bg-red-600 text-white"
                         >
                           Pay
                         </Link>

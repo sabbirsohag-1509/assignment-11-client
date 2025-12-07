@@ -53,7 +53,7 @@ const UniversitySlider = () => {
             <img
               src={logo}
               alt={`university-${index}`}
-              className="w-96 h-72 object-contain mx-auto opacity-80 hover:opacity-100 transition"
+              className="w-96 h-80 object-contain mx-auto opacity-80 hover:opacity-100 transition"
             />
           </SwiperSlide>
         ))}

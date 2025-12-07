@@ -1,26 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
+import Swal from "sweetalert2";
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const scholarshipId = searchParams.get("scholarshipId");
-
+  const sessionId = searchParams.get("session_id");
   const axiosSecure = useAxiosSecure();
 
-  const { data: scholarship, isLoading } = useQuery({
-    queryKey: ["scholarship", scholarshipId],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/scholarships/${scholarshipId}`);
-      return res.data;
-    },
-    enabled: !!scholarshipId,
-  });
-
-  if (isLoading) return <LoadingSpinner />;
+  useEffect(() => {
+    if (sessionId) {
+      axiosSecure
+        .patch(`/payment-success?session_id=${sessionId}`)
+        .then((res) => {
+          console.log("Payment confirmation response:", res.data);
+          if (res.data.success) {
+            Swal.fire(
+              "Success",
+              "Payment status updated successfully",
+              "success"
+            );
+          } else {
+            Swal.fire("Error", "Failed to update payment status", "error");
+          }
+        });
+    }
+  }, [sessionId, axiosSecure]);
+    
+   
 
   return (
     <div className="max-w-2xl mx-auto p-6 text-center">
@@ -28,23 +36,6 @@ const PaymentSuccess = () => {
         Payment Successful!
       </h2>
       <p className="mb-6">Thank you for your payment.</p>
-
-      {scholarship && (
-        <div className="border rounded-lg p-6 shadow bg-white mb-6 space-y-2 text-left">
-          <p>
-            <strong>University:</strong> {scholarship.universityName}
-          </p>
-          <p>
-            <strong>Scholarship Name:</strong> {scholarship.scholarshipName}
-          </p>
-          <p>
-            <strong>Subject:</strong> {scholarship.subjectCategory}
-          </p>
-          <p>
-            <strong>Amount Paid:</strong> ${scholarship.applicationFees}
-          </p>
-        </div>
-      )}
 
       <button
         className="btn btn-primary w-full md:w-1/2 mx-auto"
