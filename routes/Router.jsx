@@ -20,6 +20,7 @@ import PaymentSuccess from "../src/pages/Dashboard/Payment/PaymentSuccess/Paymen
 import PaymentFailed from "../src/pages/Dashboard/Payment/PaymentFailed/PaymentFailed";
 import ManageAppliedApplications from "../src/pages/Dashboard/ManageAppliedApplications/ManageAppliedApplications";
 import MyReviews from "../src/pages/Dashboard/MyReviews/MyReviews";
+import AllReviews from "../src/pages/Dashboard/AllReviews/AllReviews";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-reviews",
         element: <MyReviews></MyReviews>,
+      },
+      {
+        path: "/dashboard/all-reviews",
+        element: <AllReviews></AllReviews>
       }
     ],
   },

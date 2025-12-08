@@ -11,7 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
 import { MdOutlineManageHistory, MdRateReview } from "react-icons/md";
-import { FaAppStore } from "react-icons/fa";
+import { FaAppStore, FaRegCommentDots } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
 
 const DashboardLayout = () => {
@@ -164,6 +164,13 @@ const DashboardLayout = () => {
                 <NavLink to="/dashboard/my-reviews" className={linkStyle} end>
                   <MdRateReview size={18} />
                   My Reviews
+                </NavLink>
+              </li>
+              {/* All Reviews */}
+              <li>
+                <NavLink to="/dashboard/all-reviews" className={linkStyle} end>
+                  <FaRegCommentDots size={18}/>
+                  All Reviews
                 </NavLink>
               </li>
             </ul>

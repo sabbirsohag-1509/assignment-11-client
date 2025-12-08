@@ -81,6 +81,7 @@ const MyApplications = () => {
       applicationId: reviewApp._id,
       scholarshipId: reviewApp.scholarshipId,
       universityName: reviewApp.universityName,
+      scholarshipName: reviewApp.scholarshipName,
       userName: user.displayName,
       userEmail: user.email,
       userImage: user.photoURL,
