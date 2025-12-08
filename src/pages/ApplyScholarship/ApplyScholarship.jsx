@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
@@ -9,7 +9,6 @@ import useAuth from "../../hooks/useAuth";
 const ApplyScholarship = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate();
   const [scholarship, setScholarship] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -43,36 +42,48 @@ const ApplyScholarship = () => {
       });
   }, [id, axiosSecure, reset, user]);
 
-  const onSubmit = async (formData) => {
-    if (!scholarship) return;
-    const applicationData = {
-      scholarshipId: scholarship._id,
-      scholarshipUserId: user?.uid,
-      scholarshipName: scholarship.scholarshipName,
-      universityName: scholarship.universityName,
-      degree: scholarship.degree,
-      subjectCategory: scholarship.subjectCategory,
-      applicationFees: scholarship.applicationFees,
-      description: scholarship.description,
+ const onSubmit = async (formData) => {
+  if (!scholarship) return;
 
-      userName: formData.userName,
-      userEmail: formData.userEmail,
-      phone: formData.phone,
-      address: formData.address,
-    };
-    //   console.log("Application Data to Submit:", applicationData);
-
-    try {
-      const res = await axiosSecure.post("/applications", applicationData);
-      if (res.data.insertedId) {
-        Swal.fire("Success", "Application submitted successfully!", "success");
-        navigate("/dashboard/my-application");
-      }
-    } catch (error) {
-      console.error(error);
-      Swal.fire("Error", "Failed to submit application", "error");
-    }
+  const applicationData = {
+    scholarshipId: scholarship._id,
+    scholarshipUserId: user?.uid,
+    scholarshipName: scholarship.scholarshipName,
+    universityName: scholarship.universityName,
+    degree: scholarship.degree,
+    subjectCategory: scholarship.subjectCategory,
+    applicationFees: scholarship.applicationFees,
+    description: scholarship.description,
+    userName: formData.userName,
+    userEmail: formData.userEmail,
+    phone: formData.phone,
+    address: formData.address,
   };
+
+  try {
+    const res = await axiosSecure.post("/applications", applicationData);
+
+    if (res.data.insertedId) {
+      const applicationId = res.data.insertedId;
+
+      const stripeRes = await axiosSecure.post("/create-checkout-session", {
+        applicationId,
+        scholarshipId: scholarship._id,
+        applicationFees: scholarship.applicationFees + scholarship.serviceCharge,
+        universityName: scholarship.universityName,
+        scholarshipName: scholarship.scholarshipName,
+      });
+
+      if (stripeRes.data.url) {
+        window.location.href = stripeRes.data.url;
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    Swal.fire("Error", "Failed to submit application or start payment", "error");
+  }
+};
+
 
   if (loading) return <LoadingSpinner />;
 

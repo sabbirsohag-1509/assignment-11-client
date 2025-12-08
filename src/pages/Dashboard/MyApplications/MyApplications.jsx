@@ -10,14 +10,10 @@ const MyApplications = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedApp, setSelectedApp] = useState(null);
   const [reviewApp, setReviewApp] = useState(null);
-  const [editApp, setEditApp] = useState(null); // ⭐ NEW
+  const [editApp, setEditApp] = useState(null);
   const { user } = useAuth();
 
-  const {
-    data: apps = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: apps = [], isLoading, refetch } = useQuery({
     queryKey: ["my-applications", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/applications?email=${user?.email}`);
@@ -44,7 +40,7 @@ const MyApplications = () => {
     });
   };
 
-  // UPDATE HANDLER
+  // UPDATE
   const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -58,7 +54,6 @@ const MyApplications = () => {
         `/applications/${editApp._id}`,
         updatedData
       );
-
       if (res.data.modifiedCount > 0) {
         Swal.fire("Success", "Application updated successfully!", "success");
         setEditApp(null);
@@ -70,7 +65,7 @@ const MyApplications = () => {
     }
   };
 
-  // REVIEW HANDLER
+  // REVIEW
   const submitReview = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -106,28 +101,27 @@ const MyApplications = () => {
 
       {/* TABLE */}
       <div className="overflow-x-auto">
-        <table className="table w-full border rounded-lg">
+        <table className="table w-full border border-gray-300 rounded-lg text-sm md:text-base">
           <thead className="bg-gray-100">
             <tr>
-              <th>University</th>
-              <th>Address</th>
-              <th>Subject</th>
-              <th>Fees</th>
-              <th>Status</th>
-              <th>Feedback</th>
-              <th>Actions</th>
+              <th className="border px-3 py-2">University</th>
+              <th className="border px-3 py-2">Address</th>
+              <th className="border px-3 py-2">Subject</th>
+              <th className="border px-3 py-2">Fees</th>
+              <th className="border px-3 py-2">Status</th>
+              <th className="border px-3 py-2">Feedback</th>
+              <th className="border px-3 py-2">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {apps.map((app) => (
               <tr key={app._id} className="hover:bg-gray-50">
-                <td>{app.universityName}</td>
-                <td>{app.address}</td>
-                <td>{app.subjectCategory}</td>
-                <td>${app.applicationFees}</td>
-
-                <td>
+                <td className="border px-3 py-2">{app.universityName}</td>
+                <td className="border px-3 py-2">{app.address}</td>
+                <td className="border px-3 py-2">{app.subjectCategory}</td>
+                <td className="border px-3 py-2">${app.applicationFees}</td>
+                <td className="border px-3 py-2">
                   <span
                     className={`px-2 py-1 rounded text-white ${
                       app.applicationStatus === "pending"
@@ -142,12 +136,8 @@ const MyApplications = () => {
                     {app.applicationStatus}
                   </span>
                 </td>
-
-                <td>{app.feedback || "—"}</td>
-
-                <td className="flex gap-2 flex-wrap">
-
-                  {/* Details */}
+                <td className="border px-3 py-2">{app.feedback || "—"}</td>
+                <td className="flex gap-2 flex-wrap border px-3 py-2">
                   <button
                     className="btn btn-xs btn-info"
                     onClick={() => setSelectedApp(app)}
@@ -155,17 +145,15 @@ const MyApplications = () => {
                     Details
                   </button>
 
-                  {/* Edit — only pending */}
                   {app.applicationStatus === "pending" && (
                     <button
                       className="btn btn-xs btn-warning"
-                      onClick={() => setEditApp(app)} // ⭐ NEW
+                      onClick={() => setEditApp(app)}
                     >
                       Edit
                     </button>
                   )}
 
-                  {/* Pay */}
                   {app.applicationStatus === "pending" &&
                     app.paymentStatus === "unpaid" && (
                       <Link
@@ -176,7 +164,6 @@ const MyApplications = () => {
                       </Link>
                     )}
 
-                  {/* Delete — pending */}
                   {app.applicationStatus === "pending" && (
                     <button
                       className="btn btn-xs btn-error"
@@ -186,7 +173,6 @@ const MyApplications = () => {
                     </button>
                   )}
 
-                  {/* Add Review — completed */}
                   {app.applicationStatus === "completed" && (
                     <button
                       className="btn btn-xs btn-success"
@@ -202,12 +188,11 @@ const MyApplications = () => {
         </table>
       </div>
 
-      {/* DETAILS MODAL */}
+      {/* Modals (Details / Edit / Review) */}
       {selectedApp && (
         <dialog open className="modal">
           <div className="modal-box max-w-lg">
             <h3 className="text-xl font-semibold mb-2">Application Details</h3>
-
             <p><strong>University:</strong> {selectedApp.universityName}</p>
             <p><strong>Subject:</strong> {selectedApp.subjectCategory}</p>
             <p><strong>Degree:</strong> {selectedApp.degree}</p>
@@ -215,7 +200,6 @@ const MyApplications = () => {
             <p><strong>Status:</strong> {selectedApp.applicationStatus}</p>
             <p><strong>Phone:</strong> {selectedApp.phone}</p>
             <p><strong>Description:</strong> {selectedApp.description}</p>
-
             <div className="modal-action">
               <button className="btn" onClick={() => setSelectedApp(null)}>
                 Close
@@ -225,12 +209,10 @@ const MyApplications = () => {
         </dialog>
       )}
 
-      {/* EDIT MODAL */}
       {editApp && (
         <dialog open className="modal">
           <div className="modal-box max-w-lg">
             <h3 className="text-xl font-semibold mb-3">Edit Application</h3>
-
             <form onSubmit={handleUpdate} className="space-y-4">
               <div>
                 <label className="label">Phone</label>
@@ -241,23 +223,20 @@ const MyApplications = () => {
                   required
                 />
               </div>
-
               <div>
                 <label className="label">Address</label>
                 <textarea
                   name="address"
                   defaultValue={editApp.address}
-                  className="textarea textarea-bordered w-full"
+                  className="textarea input-bordered w-full"
                   rows={4}
                   required
                 ></textarea>
               </div>
-
               <button type="submit" className="btn btn-primary w-full">
                 Update
               </button>
             </form>
-
             <div className="modal-action">
               <button className="btn" onClick={() => setEditApp(null)}>
                 Close
@@ -267,12 +246,10 @@ const MyApplications = () => {
         </dialog>
       )}
 
-      {/* REVIEW MODAL */}
       {reviewApp && (
         <dialog open className="modal">
           <div className="modal-box max-w-lg">
             <h3 className="text-xl font-semibold">Add Review</h3>
-
             <form onSubmit={submitReview} className="space-y-4 mt-4">
               <div>
                 <label className="label">Rating (1-5)</label>
@@ -285,22 +262,20 @@ const MyApplications = () => {
                   required
                 />
               </div>
-
               <div>
-                <label className="label">Comment</label>
+                <label className="label">Write Your Review</label>
                 <textarea
                   name="comment"
                   className="textarea textarea-bordered w-full"
-                  rows={4}
+                  rows={3}
+                  placeholder="Write review..."
                   required
                 ></textarea>
               </div>
-
               <button type="submit" className="btn btn-primary w-full">
                 Submit Review
               </button>
             </form>
-
             <div className="modal-action">
               <button className="btn" onClick={() => setReviewApp(null)}>
                 Close

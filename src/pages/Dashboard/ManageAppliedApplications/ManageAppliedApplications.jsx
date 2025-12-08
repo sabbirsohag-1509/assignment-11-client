@@ -1,49 +1,99 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import Modal from "react-modal";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const ManageAppliedApplications = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
-  const [selectedApplication, setSelectedApplication] = useState(null);
   const axiosSecure = useAxiosSecure();
 
-  const openDetailsModal = (app) => {
-    setSelectedApplication(app);
-    setModalOpen(true);
-  };
+  const [selectedApp, setSelectedApp] = useState(null);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [detailsModal, setDetailsModal] = useState(false);
+  const [feedbackModal, setFeedbackModal] = useState(false);
 
-  const openFeedbackModal = (app) => {
-    setSelectedApplication(app);
-    setFeedbackModalOpen(true);
-  };
-
-  const { data: applications, isLoading } = useQuery({
-    queryKey: ["applications"],
+  // Fetch All Applications
+  const { data: applications = [], isLoading, refetch } = useQuery({
+    queryKey: ["all-applications"],
     queryFn: async () => {
       const res = await axiosSecure.get("/all-applications");
       return res.data;
     },
   });
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  // DETAILS MODAL OPEN
+  const openDetails = (app) => {
+    setSelectedApp(app);
+    setDetailsModal(true);
+  };
+
+  // FEEDBACK MODAL OPEN
+  const openFeedback = (app) => {
+    setSelectedApp(app);
+    setFeedbackText(app.feedback || "");
+    setFeedbackModal(true);
+  };
+
+  //Feedback Submit Handler
+  const handleFeedbackSubmit = async () => {
+    const payload = { feedback: feedbackText };
+
+    const res = await axiosSecure.patch(
+      `/applications/moderator/${selectedApp._id}`,
+      payload
+    );
+
+    if (res.data.modifiedCount > 0) {
+      Swal.fire("Success!", "Feedback submitted", "success");
+      setFeedbackModal(false);
+      refetch();
+    }
+  };
+
+  // Status Change Handler
+  const handleStatusChange = async (id, newStatus) => {
+    if (!newStatus) return;
+
+    const payload = { applicationStatus: newStatus };
+
+    const res = await axiosSecure.patch(
+      `/applications/moderator/${id}`,
+      payload
+    );
+
+    if (res.data.modifiedCount > 0) {
+      Swal.fire("Updated!", `Status changed to ${newStatus}`, "success");
+      refetch();
+    }
+  };
+
+  //  Cancel application Handler
+  const handleCancel = async (id) => {
+    const res = await axiosSecure.patch(`/applications/moderator/${id}`, {
+      applicationStatus: "rejected",
+    });
+
+    if (res.data.modifiedCount > 0) {
+      Swal.fire("Cancelled!", "Application rejected", "success");
+      refetch();
+    }
+  };
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="p-4 lg:p-6">
-      <h2 className="text-xl md:text-2xl font-bold mb-4 text-center md:text-left">
-        Manage Applied Applications({applications.length})
+      <h2 className="text-xl md:text-2xl font-bold mb-6">
+        Manage Applied Applications ({applications.length})
       </h2>
 
-      {/* Responsive Table */}
+      {/* TABLE */}
       <div className="overflow-x-auto">
         <table className="table-auto w-full border border-gray-300 text-sm md:text-base">
           <thead className="bg-gray-100">
             <tr>
-              <th className="border px-3 py-2">Applicant Name</th>
+              <th className="border px-3 py-2">Name</th>
               <th className="border px-3 py-2">Email</th>
               <th className="border px-3 py-2">University</th>
               <th className="border px-3 py-2">Feedback</th>
@@ -59,40 +109,65 @@ const ManageAppliedApplications = () => {
                 <td className="border px-3 py-2">{app.userName}</td>
                 <td className="border px-3 py-2">{app.userEmail}</td>
                 <td className="border px-3 py-2">{app.universityName}</td>
-                <td className="border px-3 py-2">{app.feedback || "N/A"}</td>
-                <td className="border px-3 py-2">{app.applicationStatus}</td>
-                {/* <td className="border px-3 py-2">{app.paymentStatus}</td> */}
-                { 
-                  app.paymentStatus === "paid" ? (
-                    <td className="border px-3 py-2 text-green-600 font-semibold">paid</td>
-                  ) : (
-                    <td className="border px-3 py-2 text-red-600 font-semibold">unpaid</td>
-                  )
-                }
+                <td className="border px-3 py-2">{app.feedback || "—"}</td>
 
-                {/* Responsive Actions */}
-                <td className="border px-3 py-2 space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row justify-center items-center">
+                <td className="border px-3 py-2">
+                  <span
+                    className={`px-2 py-1 rounded text-white ${
+                      app.applicationStatus === "pending"
+                        ? "bg-yellow-500"
+                        : app.applicationStatus === "processing"
+                        ? "bg-blue-500"
+                        : app.applicationStatus === "completed"
+                        ? "bg-green-600"
+                        : "bg-red-600"
+                    }`}
+                  >
+                    {app.applicationStatus}
+                  </span>
+                </td>
+
+                <td
+                  className={`border px-3 py-2 font-semibold ${
+                    app.paymentStatus === "paid"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {app.paymentStatus}
+                </td>
+
+                {/* ACTIONS */}
+                <td className="border px-3 py-2 flex flex-col md:flex-row gap-2">
                   <button
-                    className="btn btn-sm btn-info w-full md:w-auto"
-                    onClick={() => openDetailsModal(app)}
+                    onClick={() => openDetails(app)}
+                    className="btn btn-xs btn-info"
                   >
                     Details
                   </button>
 
                   <button
-                    className="btn btn-sm btn-primary w-full md:w-auto"
-                    onClick={() => openFeedbackModal(app)}
+                    onClick={() => openFeedback(app)}
+                    className="btn btn-xs btn-primary"
                   >
                     Feedback
                   </button>
 
-                  <select className="border px-2 py-1 rounded w-full md:w-auto">
+                  <select
+                    className="border px-2 py-1 rounded"
+                    onChange={(e) =>
+                      handleStatusChange(app._id, e.target.value)
+                    }
+                  >
                     <option value="">Update Status</option>
                     <option value="processing">Processing</option>
                     <option value="completed">Completed</option>
                   </select>
 
-                  <button className="btn btn-sm btn-error w-full md:w-auto">
+                  <button
+                    onClick={() => handleCancel(app._id)}
+                    className="btn btn-xs btn-error"
+                  >
                     Cancel
                   </button>
                 </td>
@@ -102,33 +177,32 @@ const ManageAppliedApplications = () => {
         </table>
       </div>
 
-      {/* Details Modal */}
+      {/* DETAILS MODAL */}
       <Modal
-        isOpen={modalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        contentLabel="Application Details"
-        className="bg-white p-6 rounded-xl w-[95%] md:w-[70%] lg:w-[50%] mx-auto mt-20 shadow-xl"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-start md:items-center"
+        isOpen={detailsModal}
+        onRequestClose={() => setDetailsModal(false)}
+        className="bg-white p-6 rounded-xl w-[95%] md:w-[60%] mx-auto mt-20 shadow-xl"
+          overlayClassName="fixed inset-0 ml:0 md:ml-20 lg:ml-28 bg-black/20 backdrop-blur-none flex items-center justify-center"
       >
-        {selectedApplication && (
+        {selectedApp && (
           <div>
-            <h3 className="text-xl md:text-2xl font-bold mb-4 text-center">
+            <h3 className="text-xl font-bold mb-3 text-center">
               Application Details
             </h3>
 
-            <div className="space-y-2 text-sm md:text-base">
-              <p><strong>Name:</strong> {selectedApplication.userName}</p>
-              <p><strong>Email:</strong> {selectedApplication.userEmail}</p>
-              <p><strong>University:</strong> {selectedApplication.universityName}</p>
-              <p><strong>Scholarship:</strong> {selectedApplication.scholarshipName}</p>
-              <p><strong>Status:</strong> {selectedApplication.applicationStatus}</p>
-              <p><strong>Payment:</strong> {selectedApplication.paymentStatus}</p>
-              <p><strong>Feedback:</strong> {selectedApplication.feedback || "N/A"}</p>
+            <div className="space-y-2 text-sm">
+              <p><strong>Name:</strong> {selectedApp.userName}</p>
+              <p><strong>Email:</strong> {selectedApp.userEmail}</p>
+              <p><strong>University:</strong> {selectedApp.universityName}</p>
+              <p><strong>Scholarship:</strong> {selectedApp.scholarshipName}</p>
+              <p><strong>Status:</strong> {selectedApp.applicationStatus}</p>
+              <p><strong>Payment:</strong> {selectedApp.paymentStatus}</p>
+              <p><strong>Feedback:</strong> {selectedApp.feedback || "—"}</p>
             </div>
 
             <button
               className="btn btn-sm btn-primary w-full mt-4"
-              onClick={() => setModalOpen(false)}
+              onClick={() => setDetailsModal(false)}
             >
               Close
             </button>
@@ -136,38 +210,38 @@ const ManageAppliedApplications = () => {
         )}
       </Modal>
 
-      {/* Feedback Modal */}
+      {/* FEEDBACK MODAL */}
       <Modal
-        isOpen={feedbackModalOpen}
-        onRequestClose={() => setFeedbackModalOpen(false)}
-        contentLabel="Add Feedback"
-        className="bg-white p-6 rounded-xl w-[95%] md:w-[70%] lg:w-[50%] mx-auto mt-20 shadow-xl"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-start md:items-center"
+        isOpen={feedbackModal}
+        onRequestClose={() => setFeedbackModal(false)}
+        className="bg-white   p-6 rounded-xl w-[95%] md:w-[60%] mx-auto mt-20 shadow-xl"
+         overlayClassName="fixed inset-0 ml:0 md:ml-20 lg:ml-28 bg-black/20 backdrop-blur-none flex items-center justify-center"
       >
-        {selectedApplication && (
-          <div>
-            <h3 className="text-xl font-bold mb-4 text-center">Add Feedback</h3>
-            <p className="mb-2 text-center">
-              <strong>Applicant:</strong> {selectedApplication.userName}
-            </p>
+        <h3 className="text-xl font-semibold mb-3 text-center">
+          Add Feedback
+        </h3>
 
-            <textarea
-              className="w-full border p-3 h-32 rounded-lg mb-4 focus:outline-none focus:ring"
-              placeholder="Write feedback here..."
-            ></textarea>
+        <textarea
+          className="w-full border p-3 h-32 rounded-lg"
+          value={feedbackText}
+          onChange={(e) => setFeedbackText(e.target.value)}
+        ></textarea>
 
-            <div className="flex justify-end gap-3">
-              <button
-                className="btn btn-sm btn-secondary btn-outline"
-                onClick={() => setFeedbackModalOpen(false)}
-              >
-                Cancel
-              </button>
+        <div className="flex justify-end gap-3 mt-4">
+          <button
+            className="btn btn-sm"
+            onClick={() => setFeedbackModal(false)}
+          >
+            Cancel
+          </button>
 
-              <button className="btn btn-sm btn-primary">Submit</button>
-            </div>
-          </div>
-        )}
+          <button
+            className="btn btn-sm btn-primary"
+            onClick={handleFeedbackSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </Modal>
     </div>
   );
