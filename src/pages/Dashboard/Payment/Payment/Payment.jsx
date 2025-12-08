@@ -5,7 +5,8 @@ import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const Payment = () => {
-  const { scholarshipId } = useParams();
+  const { scholarshipId, applicationId } = useParams();
+
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
@@ -23,6 +24,7 @@ const Payment = () => {
   const handlePaymentBtn = async() => {
     const paymentInfo = {
       scholarshipId: scholarship._id,
+      applicationId: applicationId,
       universityName: scholarship.universityName,
       scholarshipName: scholarship.scholarshipName,
       applicationFees: scholarship.applicationFees,

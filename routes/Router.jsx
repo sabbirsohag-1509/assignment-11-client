@@ -89,7 +89,7 @@ const router = createBrowserRouter([
         Component: MyApplications,
       },
       {
-        path: "/dashboard/payment/:scholarshipId",
+        path: "/dashboard/payment/:scholarshipId/:applicationId",
         element: <Payment></Payment>,
       },
       {

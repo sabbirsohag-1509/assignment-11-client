@@ -24,17 +24,7 @@ const MyApplications = () => {
     },
   });
 
-
-
-
-
-
   //update btnHandler
-
-  
-  
-
-
 
   //DELETEbtnHandler
   const handleDelete = (id) => {
@@ -141,31 +131,21 @@ const MyApplications = () => {
 
                   {/* Edit — Only pending */}
                   {app.applicationStatus === "pending" && (
-                    <button
-                      className="btn btn-xs btn-warning"
-                      
-                    >
-                      Edit
-                    </button>
+                    <button className="btn btn-xs btn-warning">Edit</button>
                   )}
 
                   {/* Pay — only pending + unpaid */}
-                  {app.applicationStatus === "pending" && (
-                    <>
-                      {app.paymentStatus === "unpaid" ? (
+                  {app.applicationStatus === "pending" &&
+                    app.paymentStatus === "unpaid" && (
+                      <>
                         <Link
-                          to={`/dashboard/payment/${app.scholarshipId}`}
+                          to={`/dashboard/payment/${app.scholarshipId}/${app._id}`}
                           className="btn btn-xs bg-red-600 text-white"
                         >
                           Pay
                         </Link>
-                      ) : (
-                        <span className="btn btn-xs btn-success cursor-not-allowed">
-                          Paid
-                        </span>
-                      )}
-                    </>
-                  )}
+                      </>
+                    )}
 
                   {/* Delete — only pending */}
                   {app.applicationStatus === "pending" && (

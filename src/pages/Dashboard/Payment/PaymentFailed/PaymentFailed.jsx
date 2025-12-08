@@ -7,22 +7,24 @@ import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner
 const PaymentFailed = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const scholarshipId = searchParams.get("scholarshipId");
+  const applicationId = searchParams.get("applicationId");
   const errorMessage = searchParams.get("error");
 
   const axiosSecure = useAxiosSecure();
 
-  const { data: scholarship, isLoading } = useQuery({
-    queryKey: ["scholarship", scholarshipId],
+  // Fetch application instead of scholarship
+  const { data: application, isLoading } = useQuery({
+    queryKey: ["application", applicationId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/scholarships/${scholarshipId}`);
+      const res = await axiosSecure.get(`/applications/${applicationId}`);
       return res.data;
     },
-    enabled: !!scholarshipId,
+    enabled: !!applicationId,
   });
 
-  if (isLoading) return <LoadingSpinner />;
 
+
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div className="max-w-2xl mx-auto p-6 text-center">
       <h2 className="text-2xl font-semibold mb-4 text-red-600">
@@ -32,10 +34,10 @@ const PaymentFailed = () => {
         Unfortunately, your payment for the scholarship has failed.
       </p>
 
-      {scholarship ? (
+      {application ? (
         <p className="mb-2">
-          <strong>University Name:</strong> {scholarship.universityName} <br /> 
-          <strong>Scholarship Name:</strong> {scholarship.scholarshipName}
+          <strong>University Name:</strong> {application.universityName} <br /> 
+          <strong>Scholarship Name:</strong> {application.scholarshipName}
         </p>
       ) : (
         <p className="mb-2 text-gray-500">Scholarship info not found.</p>

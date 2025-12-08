@@ -1,5 +1,6 @@
 import React from "react";
 import bannerImg from "../../../assets/bannerImg.jpg";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
@@ -25,9 +26,9 @@ const Banner = () => {
             Discover top scholarships from universities worldwide. Apply easily
             and simplify your path to financial aid and education opportunities.
           </p>
-          <button className="btn btn-primary btn-lg shadow-lg hover:scale-105 transition-transform duration-300">
+          <Link to='/all-scholarships' className="btn btn-primary btn-lg shadow-lg hover:scale-105 transition-transform duration-300">
             Search Scholarship
-          </button>
+          </Link>
         </div>
       </div>
     </section>
