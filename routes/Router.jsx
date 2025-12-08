@@ -19,6 +19,7 @@ import Payment from "../src/pages/Dashboard/Payment/Payment/Payment";
 import PaymentSuccess from "../src/pages/Dashboard/Payment/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "../src/pages/Dashboard/Payment/PaymentFailed/PaymentFailed";
 import ManageAppliedApplications from "../src/pages/Dashboard/ManageAppliedApplications/ManageAppliedApplications";
+import MyReviews from "../src/pages/Dashboard/MyReviews/MyReviews";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/manage-applied-applications",
         element: <ManageAppliedApplications></ManageAppliedApplications>
+      },
+      {
+        path: "/dashboard/my-reviews",
+        element: <MyReviews></MyReviews>,
       }
     ],
   },

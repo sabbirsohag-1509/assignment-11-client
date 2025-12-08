@@ -10,7 +10,7 @@ import Logo from "../../pages/Home/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
 import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
-import { MdOutlineManageHistory } from "react-icons/md";
+import { MdOutlineManageHistory, MdRateReview } from "react-icons/md";
 import { FaAppStore } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
 
@@ -157,6 +157,13 @@ const DashboardLayout = () => {
                 <NavLink to="/dashboard/manage-applied-applications" className={linkStyle} end>
                   <SiNginxproxymanager size={18}/>
                   Manage Applied Applications
+                </NavLink>
+              </li>
+              {/* My Reviews */}
+              <li>
+                <NavLink to="/dashboard/my-reviews" className={linkStyle} end>
+                  <MdRateReview size={18} />
+                  My Reviews
                 </NavLink>
               </li>
             </ul>

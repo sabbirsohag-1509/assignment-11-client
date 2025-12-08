@@ -12,8 +12,13 @@ const MyApplications = () => {
   const [reviewApp, setReviewApp] = useState(null);
   const [editApp, setEditApp] = useState(null);
   const { user } = useAuth();
+  const [rating, setRating] = useState(0);
 
-  const { data: apps = [], isLoading, refetch } = useQuery({
+  const {
+    data: apps = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["my-applications", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/applications?email=${user?.email}`);
@@ -72,18 +77,24 @@ const MyApplications = () => {
     const rating = form.rating.value;
     const comment = form.comment.value;
 
-    const payload = {
+    const reviewData = {
       applicationId: reviewApp._id,
       scholarshipId: reviewApp.scholarshipId,
-      rating,
-      comment,
+      universityName: reviewApp.universityName,
+      userName: user.displayName,
+      userEmail: user.email,
+      userImage: user.photoURL,
+      ratingPoint: rating,
+      reviewComment: comment,
+      reviewDate: new Date().toISOString(),
     };
 
     try {
-      const res = await axiosSecure.post("/reviews", payload);
+      const res = await axiosSecure.post("/reviews", reviewData);
       if (res.data.insertedId) {
         Swal.fire("Thank you!", "Your review has been submitted.", "success");
         setReviewApp(null);
+        refetch();
       }
     } catch (err) {
       console.error(err);
@@ -98,7 +109,6 @@ const MyApplications = () => {
       <h2 className="text-2xl font-semibold mb-4">
         My Applications ({apps.length})
       </h2>
-
       {/* TABLE */}
       <div className="overflow-x-auto">
         <table className="table w-full border border-gray-300 rounded-lg text-sm md:text-base">
@@ -187,19 +197,32 @@ const MyApplications = () => {
           </tbody>
         </table>
       </div>
-
       {/* Modals (Details / Edit / Review) */}
       {selectedApp && (
         <dialog open className="modal">
           <div className="modal-box max-w-lg">
             <h3 className="text-xl font-semibold mb-2">Application Details</h3>
-            <p><strong>University:</strong> {selectedApp.universityName}</p>
-            <p><strong>Subject:</strong> {selectedApp.subjectCategory}</p>
-            <p><strong>Degree:</strong> {selectedApp.degree}</p>
-            <p><strong>Fees:</strong> ${selectedApp.applicationFees}</p>
-            <p><strong>Status:</strong> {selectedApp.applicationStatus}</p>
-            <p><strong>Phone:</strong> {selectedApp.phone}</p>
-            <p><strong>Description:</strong> {selectedApp.description}</p>
+            <p>
+              <strong>University:</strong> {selectedApp.universityName}
+            </p>
+            <p>
+              <strong>Subject:</strong> {selectedApp.subjectCategory}
+            </p>
+            <p>
+              <strong>Degree:</strong> {selectedApp.degree}
+            </p>
+            <p>
+              <strong>Fees:</strong> ${selectedApp.applicationFees}
+            </p>
+            <p>
+              <strong>Status:</strong> {selectedApp.applicationStatus}
+            </p>
+            <p>
+              <strong>Phone:</strong> {selectedApp.phone}
+            </p>
+            <p>
+              <strong>Description:</strong> {selectedApp.description}
+            </p>
             <div className="modal-action">
               <button className="btn" onClick={() => setSelectedApp(null)}>
                 Close
@@ -208,7 +231,6 @@ const MyApplications = () => {
           </div>
         </dialog>
       )}
-
       {editApp && (
         <dialog open className="modal">
           <div className="modal-box max-w-lg">
@@ -245,23 +267,41 @@ const MyApplications = () => {
           </div>
         </dialog>
       )}
-
+      {/* REVIEW MODAL */}
+      ...
       {reviewApp && (
         <dialog open className="modal">
           <div className="modal-box max-w-lg">
             <h3 className="text-xl font-semibold">Add Review</h3>
-            <form onSubmit={submitReview} className="space-y-4 mt-4">
+
+            <form
+              onSubmit={(e) => {
+                submitReview(e);
+                setRating(0);
+              }}
+              className="space-y-4 mt-4"
+            >
+              {/* Custom Star Rating */}
               <div>
                 <label className="label">Rating (1-5)</label>
-                <input
-                  type="number"
-                  name="rating"
-                  min="1"
-                  max="5"
-                  className="input input-bordered w-full"
-                  required
-                />
+                <div className="flex gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setRating(star)}
+                      className={`text-3xl cursor-pointer ${
+                        star <= rating ? "text-yellow-500" : "text-gray-400"
+                      } transition-colors duration-200`}
+                    >
+                      ★
+                    </button>
+                  ))}
+                </div>
+                <input type="hidden" name="rating" value={rating} required />
               </div>
+
+              {/* Review Text */}
               <div>
                 <label className="label">Write Your Review</label>
                 <textarea
@@ -272,12 +312,20 @@ const MyApplications = () => {
                   required
                 ></textarea>
               </div>
+
               <button type="submit" className="btn btn-primary w-full">
                 Submit Review
               </button>
             </form>
+
             <div className="modal-action">
-              <button className="btn" onClick={() => setReviewApp(null)}>
+              <button
+                className="btn"
+                onClick={() => {
+                  setReviewApp(null);
+                  setRating(0);
+                }}
+              >
                 Close
               </button>
             </div>

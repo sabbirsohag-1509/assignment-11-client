@@ -127,16 +127,16 @@ const ScholarshipDetails = () => {
                 />
                 <div>
                   <h4 className="font-bold text-gray-800">{review.userName}</h4>
-                  <p className="text-sm text-gray-500">{review.date}</p>
+                  <p className="text-sm text-gray-500">{review.reviewDate}</p>
                 </div>
               </div>
 
               {/* Rating */}
               <div className="flex items-center gap-1 text-yellow-500 mb-2">
-                {"⭐".repeat(review.rating)}
+                {"⭐".repeat(review.ratingPoint)}
               </div>
 
-              <p className="text-gray-700">{review.comment}</p>
+              <p className="text-gray-700">{review.reviewComment}</p>
             </div>
           ))}
         </div>
