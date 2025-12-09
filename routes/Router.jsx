@@ -22,6 +22,8 @@ import ManageAppliedApplications from "../src/pages/Dashboard/ManageAppliedAppli
 import MyReviews from "../src/pages/Dashboard/MyReviews/MyReviews";
 import AllReviews from "../src/pages/Dashboard/AllReviews/AllReviews";
 import ManageUsers from "../src/pages/Dashboard/ManageUsers/ManageUsers";
+import Analytics from "../src/pages/Dashboard/Analytics/Analytics";
+import AdminRoute from "../src/context/PrivateRoute/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -77,11 +79,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/add-scholarship",
-        Component: AddScholarship,
+        element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute>,
       },
       {
         path: "/dashboard/manage-scholarship",
-        Component: ManageScholarships,
+        element: <AdminRoute><ManageScholarships></ManageScholarships></AdminRoute>,
       },
       {
         path: "/dashboard/update-scholarship/:id",
@@ -117,8 +119,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers></ManageUsers>
-      }
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+      },
+      {
+        path: "/dashboard/analytics",
+        element: <AdminRoute><Analytics></Analytics></AdminRoute>,
+      },
     ],
   },
   {

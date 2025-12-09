@@ -1,22 +1,20 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
-import {
-  FiHome,
-  FiPlusCircle,
-  FiSettings,
-  FiLogOut,
-} from "react-icons/fi";
+import { FiHome, FiPlusCircle, FiSettings, FiLogOut } from "react-icons/fi";
 import Logo from "../../pages/Home/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
 import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
 import { MdOutlineManageHistory, MdRateReview } from "react-icons/md";
-import { FaAppStore, FaRegCommentDots } from "react-icons/fa";
+import { FaAppStore, FaChartLine, FaRegCommentDots } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
 import { FaUsersGear } from "react-icons/fa6";
+import useRole from "../../hooks/useRole";
 
 const DashboardLayout = () => {
   const { user, logOutInfo } = useAuth();
+  const { role } = useRole();
+  console.log("Current User Role:", role);
   const linkStyle = ({ isActive }) =>
     isActive
       ? "px-4 py-2 border-b-2 border-primary font-semibold"
@@ -130,57 +128,108 @@ const DashboardLayout = () => {
                   My Profile
                 </NavLink>
               </li>
+              {role === "Student" && (
+                <>
+                  {/* My Application */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/my-application"
+                      className={linkStyle}
+                      end
+                    >
+                      <FaAppStore size={18} />
+                      My Applications
+                    </NavLink>
+                  </li>
+                  {/* My Reviews */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/my-reviews"
+                      className={linkStyle}
+                      end
+                    >
+                      <MdRateReview size={18} />
+                      My Reviews
+                    </NavLink>
+                  </li>
+                </>
+              )}
+              {role === "Moderator" && (
+                <>
+                  {/* All Reviews */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/all-reviews"
+                      className={linkStyle}
+                      end
+                    >
+                      <FaRegCommentDots size={18} />
+                      All Reviews
+                    </NavLink>
+                  </li>
 
-              {/* Add New */}
-              <li>
-                <NavLink to="/dashboard/add-scholarship" className={linkStyle} end>
-                  <FiPlusCircle size={18} />
-                  Add Scholarship
-                </NavLink>
-              </li>
+                  {/* Manage Applied Applications */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/manage-applied-applications"
+                      className={linkStyle}
+                      end
+                    >
+                      <SiNginxproxymanager size={18} />
+                      Manage Applied Applications
+                    </NavLink>
+                  </li>
+                </>
+              )}
 
-              {/* Manage Scholarship */}
-              <li>
-                <NavLink to="/dashboard/manage-scholarship" className={linkStyle} end>
-                  <MdOutlineManageHistory size={18}/>
-                  Manage Scholarships
-                </NavLink>
-              </li>
-              {/* My Application */}
-              <li>
-                <NavLink to="/dashboard/my-application" className={linkStyle} end>
-                  <FaAppStore size={18} />
-                  My Applications
-                </NavLink>
-              </li>
-              {/* Manage Applied Applications */}
-              <li>
-                <NavLink to="/dashboard/manage-applied-applications" className={linkStyle} end>
-                  <SiNginxproxymanager size={18}/>
-                  Manage Applied Applications
-                </NavLink>
-              </li>
-              {/* My Reviews */}
-              <li>
-                <NavLink to="/dashboard/my-reviews" className={linkStyle} end>
-                  <MdRateReview size={18} />
-                  My Reviews
-                </NavLink>
-              </li>
-              {/* All Reviews */}
-              <li>
-                <NavLink to="/dashboard/all-reviews" className={linkStyle} end>
-                  <FaRegCommentDots size={18}/>
-                  All Reviews
-                </NavLink>
-              </li>
-              {/* Manage Users */}
-              <li>
-                <NavLink to="/dashboard/manage-users" className={linkStyle} end>
-                  <FaUsersGear size={18}  />
-                 Manage Users
-                </NavLink>
-              </li>
+              {role === "Admin" && (
+                <>
+                  {/* Add New */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/add-scholarship"
+                      className={linkStyle}
+                      end
+                    >
+                      <FiPlusCircle size={18} />
+                      Add Scholarship
+                    </NavLink>
+                  </li>
+                  {/* Manage Scholarship */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/manage-scholarship"
+                      className={linkStyle}
+                      end
+                    >
+                      <MdOutlineManageHistory size={18} />
+                      Manage Scholarships
+                    </NavLink>
+                  </li>
+                  {/* Manage Users */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/manage-users"
+                      className={linkStyle}
+                      end
+                    >
+                      <FaUsersGear size={18} />
+                      Manage Users
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink
+                      to="/dashboard/analytics"
+                      className={linkStyle}
+                      end
+                    >
+                      <FaChartLine size={18} />
+                      Analytics
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </nav>
 

@@ -110,7 +110,7 @@ const ManageUsers = () => {
       </div>
 
       <div className="overflow-x-auto bg-white shadow-xl rounded-2xl border border-gray-200">
-        <table className="table w-full text-gray-700">
+        <table className="table  w-full text-gray-700">
           <thead className="bg-gray-100 text-gray-600 uppercase text-sm">
             <tr>
               <th className="px-6 py-3">#</th>
