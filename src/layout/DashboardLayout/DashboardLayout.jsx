@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { MdOutlineManageHistory, MdRateReview } from "react-icons/md";
 import { FaAppStore, FaRegCommentDots } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
+import { FaUsersGear } from "react-icons/fa6";
 
 const DashboardLayout = () => {
   const { user, logOutInfo } = useAuth();
@@ -171,6 +172,13 @@ const DashboardLayout = () => {
                 <NavLink to="/dashboard/all-reviews" className={linkStyle} end>
                   <FaRegCommentDots size={18}/>
                   All Reviews
+                </NavLink>
+              </li>
+              {/* Manage Users */}
+              <li>
+                <NavLink to="/dashboard/manage-users" className={linkStyle} end>
+                  <FaUsersGear size={18}  />
+                 Manage Users
                 </NavLink>
               </li>
             </ul>

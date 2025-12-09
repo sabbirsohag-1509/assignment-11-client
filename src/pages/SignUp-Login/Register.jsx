@@ -18,6 +18,7 @@ export default function Register() {
   } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -44,6 +45,19 @@ export default function Register() {
       const uploadedImageURL = imgRes.data.data.display_url;
 
       console.log("Image uploaded successfully:", uploadedImageURL);
+
+      //CREATED user in database
+      const userInfo = {
+        displayName: data.name,
+        email: data.email,
+        photoURL: uploadedImageURL,
+      };
+
+      await axios.post("http://localhost:3000/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          console.log("User info saved to database:", res.data);
+        }
+      });
 
       // Update Firebase profile
       await updateUserProfileInfo({
@@ -79,13 +93,31 @@ export default function Register() {
   //google sign in handler
   const googleSignInHandler = () => {
     loginInGoogle()
-      .then((res) => {
-        console.log("Google Sign-In Successful:", res.user);
+      .then(async (res) => {
+        const loggedUser = res.user;
+
+        // User info
+        const userInfo = {
+          displayName: loggedUser.displayName,
+          email: loggedUser.email,
+          photoURL: loggedUser.photoURL,
+        };
+
+        // Save to DB only if user does NOT exist
+        await axios
+          .post("http://localhost:3000/users", userInfo)
+          .then((dbRes) => {
+            if (dbRes.data.insertedId) {
+              console.log("New Google user added to DB:", dbRes.data);
+            } else {
+              console.log("Google user already exists in DB, skipped insert");
+            }
+          });
 
         Swal.fire({
           icon: "success",
           title: "Google Sign-In Successful!",
-          text: `Welcome, ${res.user.displayName || "User"}!`,
+          text: `Welcome, ${loggedUser.displayName}!`,
           timer: 1500,
           showConfirmButton: false,
         });
@@ -98,7 +130,7 @@ export default function Register() {
         Swal.fire({
           icon: "error",
           title: "Google Sign-In Failed!",
-          text: error.message || "Something went wrong during Google sign-in.",
+          text: error.message,
         });
       });
   };

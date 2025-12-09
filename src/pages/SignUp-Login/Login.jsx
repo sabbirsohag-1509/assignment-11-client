@@ -5,10 +5,11 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { loginInfo, loginInGoogle } = useAuth();
+  const { loginInfo, loginInGoogle, setUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -46,29 +47,49 @@ const LogIn = () => {
   };
 
   //google sign in handler
-  const googleSignInHandler = () => {
-    loginInGoogle()
-      .then((res) => {
-        console.log("Google Sign-In Successful:", res.user);
-        Swal.fire({
-          icon: "success",
-          title: "Google Sign-In Successful!",
-          text: `Welcome, ${res.user.displayName || "User"}!`,
-          timer: 1500,
-          showConfirmButton: false,
-        });
+const googleSignInHandler = async () => {
+  try {
+    const res = await loginInGoogle();
+    const user = res.user;
 
-        navigate(location.state || "/");
-      })
-      .catch((error) => {
-        console.error("Google Sign-In Error:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Google Sign-In Failed!",
-          text: error.message || "Something went wrong during Google sign-in.",
-        });
+    // Prepare user info for DB
+    const userInfo = {
+      displayName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+    };
+
+    // Save to DB (only insert if new user)
+    await axios.post("http://localhost:3000/users", userInfo)
+      .then((dbRes) => {
+        if (dbRes.data.insertedId) {
+          console.log("New Google user added to DB:", dbRes.data);
+        } else {
+          console.log("Google user already exists in DB, skipped insert");
+        }
       });
-  };
+
+    // Update global user state
+    setUser(userInfo);
+
+    Swal.fire({
+      icon: "success",
+      title: "Google Sign-In Successful!",
+      text: `Welcome, ${user.displayName}!`,
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+    navigate(location.state || "/");
+  } catch (error) {
+    console.error("Google Sign-In Error:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Google Sign-In Failed!",
+      text: error.message || "Something went wrong during Google sign-in.",
+    });
+  }
+};
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 p-4">

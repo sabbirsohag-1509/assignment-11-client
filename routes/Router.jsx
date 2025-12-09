@@ -21,6 +21,7 @@ import PaymentFailed from "../src/pages/Dashboard/Payment/PaymentFailed/PaymentF
 import ManageAppliedApplications from "../src/pages/Dashboard/ManageAppliedApplications/ManageAppliedApplications";
 import MyReviews from "../src/pages/Dashboard/MyReviews/MyReviews";
 import AllReviews from "../src/pages/Dashboard/AllReviews/AllReviews";
+import ManageUsers from "../src/pages/Dashboard/ManageUsers/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/all-reviews",
         element: <AllReviews></AllReviews>
+      },
+      {
+        path: "/dashboard/manage-users",
+        element: <ManageUsers></ManageUsers>
       }
     ],
   },

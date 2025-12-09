@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 
 const Profile = () => {
-  const { user, logOutInfo } = useAuth();
+  const { user, logOutInfo, } = useAuth();
   const { displayName, email, photoURL } = user || {};
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ const Profile = () => {
             {displayName || "Unknown User"}
           </h2>
           <p className="text-gray-500 dark:text-gray-400">{email}</p>
-          <p className="text-gray-500 dark:text-gray-400 py-2">Role:</p>
+          <p className="text-gray-500 dark:text-gray-400 py-2">Role:{user.role }</p>
         </div>
 
         {/* Divider */}
