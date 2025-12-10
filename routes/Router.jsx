@@ -24,6 +24,7 @@ import AllReviews from "../src/pages/Dashboard/AllReviews/AllReviews";
 import ManageUsers from "../src/pages/Dashboard/ManageUsers/ManageUsers";
 import Analytics from "../src/pages/Dashboard/Analytics/Analytics";
 import AdminRoute from "../src/context/PrivateRoute/AdminRoute";
+import ModeratorRoute from "../src/context/PrivateRoute/ModeratorRoute";
 
 const router = createBrowserRouter([
   {
@@ -107,7 +108,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/manage-applied-applications",
-        element: <ManageAppliedApplications></ManageAppliedApplications>
+        element: <ModeratorRoute><ManageAppliedApplications></ManageAppliedApplications></ModeratorRoute>,
       },
       {
         path: "/dashboard/my-reviews",
@@ -115,10 +116,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/all-reviews",
-        element: <AllReviews></AllReviews>
+        element: <ModeratorRoute><AllReviews></AllReviews></ModeratorRoute>,
       },
       {
         path: "/dashboard/manage-users",
+        // element: <ManageUsers></ManageUsers>,
         element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       },
       {

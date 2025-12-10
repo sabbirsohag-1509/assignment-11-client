@@ -136,7 +136,7 @@ const ManageUsers = () => {
                   <td className="px-6 py-3">{user.email}</td>
                   <td className="px-6 py-3 font-semibold">{user.role}</td>
                   <td className="px-6 py-3 flex gap-2 justify-center">
-                    {/* Promotion/Demotion buttons */}
+                    {/* Promotion and Demotion buttons */}
                     {user.role !== "Moderator" && (
                       <button
                         className="btn btn-sm btn-primary text-gray-800"

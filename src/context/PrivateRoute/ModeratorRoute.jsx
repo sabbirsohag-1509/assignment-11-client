@@ -4,17 +4,19 @@ import useRole from '../../hooks/useRole';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import Forbidden from '../../components/Forbidden/Forbidden';
 
-const AdminRoute = ({children}) => {
+const ModeratorRoute = ({children}) => {
     const { loading } = useAuth();
     const { role, roleLoading } = useRole();
 
     if (loading || roleLoading) {
         return <LoadingSpinner></LoadingSpinner>;
-    }
-    if (role !== 'Admin') {
-        return <Forbidden></Forbidden>;
     }   
+
+    if (role !== 'Moderator') {
+        return <Forbidden></Forbidden>;
+    }
+
     return children;
 };
 
-export default AdminRoute;
+export default ModeratorRoute;

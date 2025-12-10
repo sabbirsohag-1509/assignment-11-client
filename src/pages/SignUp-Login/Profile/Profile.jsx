@@ -6,8 +6,9 @@ import useRole from "../../../hooks/useRole";
 
 const Profile = () => {
   const { user, logOutInfo } = useAuth();
-  const { role } = useRole();
-  const { displayName, email, photoURL } = user || {};
+  const { role,
+ } = useRole();
+  const { displayName, email, photoURL} = user || {};
   const navigate = useNavigate();
 
   const logOutHandleBtn = () => {
