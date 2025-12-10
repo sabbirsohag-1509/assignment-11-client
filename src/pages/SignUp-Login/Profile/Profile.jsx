@@ -52,7 +52,7 @@ const Profile = () => {
         <div className="text-right">
           <p className="font-semibold text-lg">Member Status</p>
           <span className="px-4 py-1 mt-1 inline-block bg-white/20 rounded-full backdrop-blur-md">
-            Verified Scholar
+            Verified {role}
           </span>
         </div>
       </div>

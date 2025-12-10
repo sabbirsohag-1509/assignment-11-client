@@ -25,6 +25,8 @@ import ManageUsers from "../src/pages/Dashboard/ManageUsers/ManageUsers";
 import Analytics from "../src/pages/Dashboard/Analytics/Analytics";
 import AdminRoute from "../src/context/PrivateRoute/AdminRoute";
 import ModeratorRoute from "../src/context/PrivateRoute/ModeratorRoute";
+import AboutUs from "../src/components/AboutUs/AboutUs";
+import Settings from "../src/pages/Dashboard/Settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/scholarshipDetails/:id",
-        Component: ScholarshipDetails,
+        element: <PrivateRoute><ScholarshipDetails></ScholarshipDetails></PrivateRoute>,
       },
       {
         path: "/apply-scholarship/:id",
@@ -57,12 +59,8 @@ const router = createBrowserRouter([
         Component: Register,
       },
       {
-        path: "/profile",
-        element: (
-          <PrivateRoute>
-            <Profile></Profile>
-          </PrivateRoute>
-        ),
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
       },
     ],
   },
@@ -127,6 +125,15 @@ const router = createBrowserRouter([
         path: "/dashboard/analytics",
         element: <AdminRoute><Analytics></Analytics></AdminRoute>,
       },
+      {
+        path: "/dashboard/settings",
+        element: <Settings></Settings>
+      },
+      {
+        path: "/dashboard/profile",
+        Component: Profile,
+      }
+      
     ],
   },
   {

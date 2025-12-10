@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import { FiHome, FiPlusCircle, FiSettings, FiLogOut } from "react-icons/fi";
 import Logo from "../../pages/Home/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
@@ -14,7 +14,7 @@ import useRole from "../../hooks/useRole";
 const DashboardLayout = () => {
   const { user, logOutInfo } = useAuth();
   const { role } = useRole();
-  console.log("Current User Role:", role);
+  // console.log("Current User Role:", role);
   const linkStyle = ({ isActive }) =>
     isActive
       ? "px-4 py-2 border-b-2 border-primary font-semibold"
@@ -81,11 +81,18 @@ const DashboardLayout = () => {
               <h1 className="text-lg font-semibold">Dashboard</h1>
             </div>
             <div>
-              <img
-                className="w-10 h-10 rounded-full bg-primary"
-                src={user.photoURL}
-                alt=""
-              />
+              <div className="flex items-center gap-3">
+                <div className="text-right text-sm">
+                  <span className="font-medium">Hello, </span>
+                  <span className="font-semibold">{user.displayName}</span> <br />
+                  <span className="font-bold text-primary">{role} </span>
+                </div>
+                <img
+                  className="w-10 h-10 rounded-full bg-primary"
+                  src={user.photoURL}
+                  alt=""
+                />
+              </div>
             </div>
           </div>
         </header>
@@ -123,7 +130,7 @@ const DashboardLayout = () => {
               </li>
               {/* Dashboard */}
               <li>
-                <NavLink to="/profile" className={linkStyle} end>
+                <NavLink to="/dashboard/profile" className={linkStyle} end>
                   <CgProfile size={18} />
                   My Profile
                 </NavLink>
@@ -156,18 +163,6 @@ const DashboardLayout = () => {
               )}
               {role === "Moderator" && (
                 <>
-                  {/* All Reviews */}
-                  <li>
-                    <NavLink
-                      to="/dashboard/all-reviews"
-                      className={linkStyle}
-                      end
-                    >
-                      <FaRegCommentDots size={18} />
-                      All Reviews
-                    </NavLink>
-                  </li>
-
                   {/* Manage Applied Applications */}
                   <li>
                     <NavLink
@@ -177,6 +172,18 @@ const DashboardLayout = () => {
                     >
                       <SiNginxproxymanager size={18} />
                       Manage Applied Applications
+                    </NavLink>
+                  </li>
+
+                  {/* All Reviews */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/all-reviews"
+                      className={linkStyle}
+                      end
+                    >
+                      <FaRegCommentDots size={18} />
+                      All Reviews
                     </NavLink>
                   </li>
                 </>
@@ -237,10 +244,13 @@ const DashboardLayout = () => {
           <div className="p-4 border-t border-base-300">
             <ul className="menu">
               <li>
-                <button className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-primary hover:text-white">
+                <Link
+                  to="/dashboard/settings"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-primary hover:text-white"
+                >
                   <FiSettings size={18} />
                   Settings
-                </button>
+                </Link>
               </li>
 
               <li>
