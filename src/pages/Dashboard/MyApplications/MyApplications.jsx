@@ -112,92 +112,99 @@ const MyApplications = () => {
       </h2>
       {/* TABLE */}
       <div className="overflow-x-auto">
-        <table className="table w-full border border-gray-300 rounded-lg text-sm md:text-base">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border px-3 py-2">University</th>
-              <th className="border px-3 py-2">Address</th>
-              <th className="border px-3 py-2">Subject</th>
-              <th className="border px-3 py-2">Fees</th>
-              <th className="border px-3 py-2">Status</th>
-              <th className="border px-3 py-2">Feedback</th>
-              <th className="border px-3 py-2">Actions</th>
-            </tr>
-          </thead>
+  <table className="table table-zebra w-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th>University</th>
+        <th>Address</th>
+        <th>Subject</th>
+        <th>Fees</th>
+        <th>Status</th>
+        <th>Feedback</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-          <tbody>
-            {apps.map((app) => (
-              <tr key={app._id} className="hover:bg-gray-50">
-                <td className="border px-3 py-2">{app.universityName}</td>
-                <td className="border px-3 py-2">{app.address}</td>
-                <td className="border px-3 py-2">{app.subjectCategory}</td>
-                <td className="border px-3 py-2">${app.applicationFees}</td>
-                <td className="border px-3 py-2">
-                  <span
-                    className={`px-2 py-1 rounded text-white ${
-                      app.applicationStatus === "pending"
-                        ? "bg-yellow-500"
-                        : app.applicationStatus === "processing"
-                        ? "bg-blue-500"
-                        : app.applicationStatus === "completed"
-                        ? "bg-green-600"
-                        : "bg-red-600"
-                    }`}
-                  >
-                    {app.applicationStatus}
-                  </span>
-                </td>
-                <td className="border px-3 py-2">{app.feedback || "—"}</td>
-                <td className="flex gap-2 flex-wrap border px-3 py-2">
-                  <button
-                    className="btn btn-xs btn-info"
-                    onClick={() => setSelectedApp(app)}
-                  >
-                    Details
-                  </button>
+    <tbody>
+      {apps.map((app, index) => (
+        <tr key={app._id}>
+          <th>{index + 1}</th>
 
-                  {app.applicationStatus === "pending" && (
-                    <button
-                      className="btn btn-xs btn-warning"
-                      onClick={() => setEditApp(app)}
-                    >
-                      Edit
-                    </button>
-                  )}
+          <td>{app.universityName}</td>
+          <td>{app.address}</td>
+          <td>{app.subjectCategory}</td>
+          <td>${app.applicationFees}</td>
 
-                  {app.applicationStatus === "pending" &&
-                    app.paymentStatus === "unpaid" && (
-                      <Link
-                        to={`/dashboard/payment/${app.scholarshipId}/${app._id}`}
-                        className="btn btn-xs bg-red-600 text-white"
-                      >
-                        Pay
-                      </Link>
-                    )}
+          <td>
+            <span
+              className={`px-2 py-1 rounded text-white ${
+                app.applicationStatus === "pending"
+                  ? "bg-yellow-500"
+                  : app.applicationStatus === "processing"
+                  ? "bg-blue-500"
+                  : app.applicationStatus === "completed"
+                  ? "bg-green-600"
+                  : "bg-red-600"
+              }`}
+            >
+              {app.applicationStatus}
+            </span>
+          </td>
 
-                  {app.applicationStatus === "pending" && (
-                    <button
-                      className="btn btn-xs btn-error"
-                      onClick={() => handleDelete(app._id)}
-                    >
-                      Delete
-                    </button>
-                  )}
+          <td>{app.feedback || "—"}</td>
 
-                  {app.applicationStatus === "completed" && (
-                    <button
-                      className="btn btn-xs btn-success"
-                      onClick={() => setReviewApp(app)}
-                    >
-                      Add Review
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          <td className="flex gap-2 flex-wrap py-4">
+            <button
+              className="btn btn-xs btn-info"
+              onClick={() => setSelectedApp(app)}
+            >
+              Details
+            </button>
+
+            {app.applicationStatus === "pending" && (
+              <button
+                className="btn btn-xs btn-warning"
+                onClick={() => setEditApp(app)}
+              >
+                Edit
+              </button>
+            )}
+
+            {app.applicationStatus === "pending" &&
+              app.paymentStatus === "unpaid" && (
+                <Link
+                  to={`/dashboard/payment/${app.scholarshipId}/${app._id}`}
+                  className="btn btn-xs bg-red-600 text-white"
+                >
+                  Pay
+                </Link>
+              )}
+
+            {app.applicationStatus === "pending" && (
+              <button
+                className="btn btn-xs btn-error"
+                onClick={() => handleDelete(app._id)}
+              >
+                Delete
+              </button>
+            )}
+
+            {app.applicationStatus === "completed" && (
+              <button
+                className="btn btn-xs btn-success"
+                onClick={() => setReviewApp(app)}
+              >
+                Add Review
+              </button>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
       {/* Modals (Details / Edit / Review) */}
       {selectedApp && (
         <dialog open className="modal">

@@ -3,12 +3,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaUsers, FaBookReader, FaMoneyBillWave } from "react-icons/fa";
 import { Pie, PieChart, Cell, Legend, Tooltip } from "recharts";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const Analytics = () => {
   const axiosSecure = useAxiosSecure();
 
   // Fetch Total Users
-  const { data: users = {} } = useQuery({
+  const { data: users = {}, isLoading } = useQuery({
     queryKey: ["analyticsUsers"],
     queryFn: async () => {
       const res = await axiosSecure.get("/analytics/all-users");
@@ -42,7 +43,11 @@ const Analytics = () => {
   ];
 
   // Colors for each slice
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
+    const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
+    
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>;
+    };
 
   return (
     <div className="p-6">

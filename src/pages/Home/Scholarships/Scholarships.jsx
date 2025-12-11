@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaUserGraduate } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
 import { HiReceiptPercent } from "react-icons/hi2";
 import LoadingSpinner from "./../../../components/LoadingSpinner/LoadingSpinner";
@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import axios from "axios";
 
 const Scholarships = () => {
-
   const { data: scholarships = [], isLoading } = useQuery({
     queryKey: ["scholarships"],
     queryFn: async () => {
@@ -73,9 +72,15 @@ const Scholarships = () => {
                 {item.universityName}
               </h2>
 
-              <div className="text-sm flex items-center gap-2 text-gray-600">
-                <MdCategory className="text-blue-600" />
-                <span className="font-medium">{item.scholarshipCategory}</span>
+              <div className="text-sm flex justify-between items-center gap-2 text-gray-600">
+                <span className="font-medium flex items-center gap-1">
+                  <MdCategory className="text-blue-600" />
+                  {item.scholarshipCategory}
+                </span>
+                <span className="font-medium flex items-center gap-1">
+                  <FaUserGraduate className="text-blue-600" />
+                  {item.degree}
+                </span>
               </div>
 
               {/* Location */}

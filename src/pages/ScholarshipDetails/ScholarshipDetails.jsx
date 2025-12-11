@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaUserGraduate } from "react-icons/fa";
 import { MdCategory, MdOutlineAccessTimeFilled } from "react-icons/md";
 import { HiReceiptPercent } from "react-icons/hi2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -54,6 +54,12 @@ const ScholarshipDetails = () => {
               <MdCategory className="text-blue-600" />
               <span className="font-medium">
                 {scholarship.scholarshipCategory}
+              </span>
+            </span>
+            <span className="flex items-center gap-2">
+              <FaUserGraduate className="text-blue-600" />
+              <span className="font-medium">
+                {scholarship.degree}
               </span>
             </span>
 

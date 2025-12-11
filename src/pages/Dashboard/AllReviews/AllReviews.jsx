@@ -41,49 +41,55 @@ const AllReviews = () => {
         <div className="p-6">
             <h2 className="text-2xl font-semibold mb-4">All Reviews ({reviews.length})</h2>
 
-            <div className="overflow-x-auto">
-                <table className="table w-full border border-gray-300 rounded-lg text-sm md:text-base">
-                    <thead className="bg-gray-100 sticky top-0 z-10">
-                        <tr>
-                            <th className="border px-3 py-2">User</th>
-                            <th className="border px-3 py-2">Scholarship Name</th>
-                            <th className="border px-3 py-2">University Name</th>
-                            <th className="border px-3 py-2">Rating</th>
-                            <th className="border px-3 py-2">Review</th>
-                            <th className="border px-3 py-2">Date</th>
-                            <th className="border px-3 py-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {reviews.map((review) => (
-                            <tr key={review._id} className="hover:bg-gray-50 border">
-                                <td className="border px-3 py-2">{review.userName}</td>
-                                <td className="border px-3 py-2">{review.scholarshipName}</td>
-                                <td className="border px-3 py-2">{review.universityName}</td>
-                                <td className="border px-3 py-2">
-                                    {"⭐".repeat(review.ratingPoint)}
-                                </td>
-                                <td className="border px-3 py-2 max-w-xs">
-                                    <div className="max-h-20 overflow-y-auto break-words p-1">
-                                        {review.reviewComment}
-                                    </div>
-                                </td>
-                                <td className="border px-3 py-2">
-                                    {new Date(review.reviewDate).toLocaleDateString()}
-                                </td>
-                                <td className="flex gap-2 border px-3 py-2 flex-wrap">
-                                    <button 
-                                        className="btn btn-xs btn-error"
-                                        onClick={() => handleDelete(review._id)}
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+          <div className="overflow-x-auto">
+    <table className="table table-zebra w-full">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Scholarship Name</th>
+                <th>University Name</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {reviews.map((review, index) => (
+                <tr key={review._id}>
+                    <th>{index + 1}</th>
+
+                    <td>{review.userName}</td>
+                    <td>{review.scholarshipName}</td>
+                    <td>{review.universityName}</td>
+                    <td>{"⭐".repeat(review.ratingPoint)}</td>
+
+                    <td className="min-w-[280px]">
+                        <div className="max-h-20 overflow-y-auto break-words p-1">
+                            {review.reviewComment}
+                        </div>
+                    </td>
+
+                    <td>
+                        {new Date(review.reviewDate).toLocaleDateString()}
+                    </td>
+
+                    <td className="flex gap-2 flex-wrap py-4">
+                        <button
+                            className="btn btn-xs btn-error"
+                            onClick={() => handleDelete(review._id)}
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>
+
         </div>
     );
 };

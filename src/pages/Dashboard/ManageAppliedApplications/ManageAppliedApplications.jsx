@@ -90,91 +90,90 @@ const ManageAppliedApplications = () => {
 
       {/* TABLE */}
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border border-gray-300 text-sm md:text-base">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border px-3 py-2">Name</th>
-              <th className="border px-3 py-2">Email</th>
-              <th className="border px-3 py-2">University</th>
-              <th className="border px-3 py-2">Feedback</th>
-              <th className="border px-3 py-2">Status</th>
-              <th className="border px-3 py-2">Payment</th>
-              <th className="border px-3 py-2">Actions</th>
-            </tr>
-          </thead>
+       {/* TABLE */}
+<div className="overflow-x-auto">
+  <table className="table table-zebra">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>University</th>
+        <th>Feedback</th>
+        <th>Status</th>
+        <th>Payment</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-          <tbody>
-            {applications.map((app) => (
-              <tr key={app._id} className="text-center">
-                <td className="border px-3 py-2">{app.userName}</td>
-                <td className="border px-3 py-2">{app.userEmail}</td>
-                <td className="border px-3 py-2">{app.universityName}</td>
-                <td className="border px-3 py-2">{app.feedback || "—"}</td>
+    <tbody>
+      {applications.map((app, index) => (
+        <tr key={app._id}>
+          <th>{index + 1}</th>
 
-                <td className="border px-3 py-2">
-                  <span
-                    className={`px-2 py-1 rounded text-white ${
-                      app.applicationStatus === "pending"
-                        ? "bg-yellow-500"
-                        : app.applicationStatus === "processing"
-                        ? "bg-blue-500"
-                        : app.applicationStatus === "completed"
-                        ? "bg-green-600"
-                        : "bg-red-600"
-                    }`}
-                  >
-                    {app.applicationStatus}
-                  </span>
-                </td>
+          <td className="min-w-[120px]">{app.userName}</td>
+          <td className="min-w-[50px]">{app.userEmail}</td>
+          <td className="min-w-[150px]">{app.universityName}</td>
+          <td className="min-w-[120px]">{app.feedback}</td>
 
-                <td
-                  className={`border px-3 py-2 font-semibold ${
-                    app.paymentStatus === "paid"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {app.paymentStatus}
-                </td>
+          <td>
+            <span
+              className={`px-2 py-1 rounded text-white ${
+                app.applicationStatus === "pending"
+                  ? "bg-yellow-500"
+                  : app.applicationStatus === "processing"
+                  ? "bg-blue-500"
+                  : app.applicationStatus === "completed"
+                  ? "bg-green-600"
+                  : "bg-red-600"
+              }`}
+            >
+              {app.applicationStatus}
+            </span>
+          </td>
 
-                {/* ACTIONS */}
-                <td className="border px-3 py-2 flex flex-col md:flex-row gap-2">
-                  <button
-                    onClick={() => openDetails(app)}
-                    className="btn btn-xs btn-info"
-                  >
-                    Details
-                  </button>
+          <td className={app.paymentStatus === "paid" ? "text-green-600" : "text-red-600"}>
+            {app.paymentStatus}
+          </td>
 
-                  <button
-                    onClick={() => openFeedback(app)}
-                    className="btn btn-xs btn-primary"
-                  >
-                    Feedback
-                  </button>
+          {/* ACTIONS */}
+          <td className="flex flex-col md:flex-row gap-2 py-4">
+            <button
+              onClick={() => openDetails(app)}
+              className="btn btn-xs btn-info"
+            >
+              Details
+            </button>
 
-                  <select
-                    className="border px-2 py-1 rounded"
-                    onChange={(e) =>
-                      handleStatusChange(app._id, e.target.value)
-                    }
-                  >
-                    <option value="">Update Status</option>
-                    <option value="processing">Processing</option>
-                    <option value="completed">Completed</option>
-                  </select>
+            <button
+              onClick={() => openFeedback(app)}
+              className="btn btn-xs btn-primary"
+            >
+              Feedback
+            </button>
 
-                  <button
-                    onClick={() => handleCancel(app._id)}
-                    className="btn btn-xs btn-error"
-                  >
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <select
+              className="border px-2 py-1 rounded"
+              onChange={(e) => handleStatusChange(app._id, e.target.value)}
+            >
+              <option value="">Update Status</option>
+              <option value="processing">Processing</option>
+              <option value="completed">Completed</option>
+            </select>
+
+            <button
+              onClick={() => handleCancel(app._id)}
+              className="btn btn-xs btn-error"
+            >
+              Cancel
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
       </div>
 
       {/* DETAILS MODAL */}
