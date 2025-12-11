@@ -7,6 +7,7 @@ import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 import UniversitySlider from "./UniversitySlider/UniversitySlider";
 import { Contact } from "lucide-react";
 import ContactWithUs from "./ContactWithUs/ContactWithUs";
+import ReviewSlider from "./ReviewSlider/ReviewSlider";
 
 const Home = () => {
   return (
@@ -28,10 +29,13 @@ const Home = () => {
       </section>
       <section>
         <UniversitySlider></UniversitySlider>
-          </section>
-          <section> 
-              <ContactWithUs></ContactWithUs>
-          </section>
+      </section>
+      <section> 
+        <ReviewSlider></ReviewSlider>
+      </section>
+      <section>
+        <ContactWithUs></ContactWithUs>
+      </section>
     </div>
   );
 };

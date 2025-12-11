@@ -31,7 +31,7 @@ const UniversitySlider = () => {
 
       {/* Slider */}
       <Swiper
-        slidesPerView={4}
+        slidesPerView={3}
         centeredSlides={true}
         spaceBetween={30}
         grabCursor={true}

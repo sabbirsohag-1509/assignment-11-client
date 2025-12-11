@@ -84,6 +84,9 @@ const ManageAppliedApplications = () => {
 
   return (
     <div className="p-4 lg:p-6">
+      <title> 
+        Dashboard - Manage Applied Applications
+      </title>
       <h2 className="text-xl md:text-2xl font-bold mb-6">
         Manage Applied Applications ({applications.length})
       </h2>

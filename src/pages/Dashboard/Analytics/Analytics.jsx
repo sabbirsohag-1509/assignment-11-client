@@ -51,6 +51,9 @@ const Analytics = () => {
 
   return (
     <div className="p-6">
+      <title> 
+        Dashboard - Analytics
+      </title>
       <h2 className="text-3xl font-bold mb-6">📊 Analytics Summary</h2>
 
       {/* GRID */}

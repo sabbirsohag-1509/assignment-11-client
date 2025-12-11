@@ -71,6 +71,9 @@ const MyReviews = () => {
 
   return (
     <div className="p-6">
+      <title> 
+        Dashboard - My Reviews
+      </title>
       <h2 className="text-2xl font-semibold mb-4">
         My Reviews ({reviews.length})
       </h2>

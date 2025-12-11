@@ -39,6 +39,9 @@ const AllReviews = () => {
 
     return (
         <div className="p-6">
+            <title> 
+                Dashboard - All Reviews
+            </title>
             <h2 className="text-2xl font-semibold mb-4">All Reviews ({reviews.length})</h2>
 
           <div className="overflow-x-auto">

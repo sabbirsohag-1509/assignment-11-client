@@ -35,6 +35,9 @@ const AllScholarships = () => {
 
   return (
     <div>
+      <title> 
+        All Scholarships - Explore Comprehensive Opportunities for Your Future
+      </title>
       <div className="flex flex-col md:flex-row justify-between items-center mt-10 px-4">
         {/* Search Scholarships */}
         <label className="input">

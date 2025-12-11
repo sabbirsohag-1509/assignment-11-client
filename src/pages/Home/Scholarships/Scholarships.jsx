@@ -25,6 +25,9 @@ const Scholarships = () => {
 
   return (
     <div>
+      <title> 
+        Featured Scholarships - Explore Top Opportunities for Your Future
+      </title>
       {/* title  */}
       <div className="text-center my-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2">

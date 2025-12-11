@@ -39,6 +39,9 @@ const Profile = () => {
 
   return (
     <div className="p-4 md:p-6 space-y-8">
+      <title> 
+        Profile - ScholarStream
+      </title>
 
       {/*SCHOLARSTREAM BRANDING HEADER*/}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-2xl shadow-lg flex flex-col lg:flex-row justify-between items-center gap-4">

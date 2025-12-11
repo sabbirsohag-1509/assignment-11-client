@@ -51,6 +51,9 @@ const DashboardLayout = () => {
   };
   return (
     <div className="drawer lg:drawer-open bg-base-200 min-h-screen">
+      <title> 
+        Dashboard | ScholarStream
+      </title>
       <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
 
       {/* MAIN CONTENT */}

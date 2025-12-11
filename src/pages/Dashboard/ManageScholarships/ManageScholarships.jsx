@@ -54,6 +54,9 @@ const ManageScholarships = () => {
 
   return (
     <div className="p-6">
+      <title> 
+        Dashboard - Manage Scholarships
+      </title>
       <h2 className="text-2xl font-bold mb-6">
         Manage Scholarships({scholarships.length})
       </h2>

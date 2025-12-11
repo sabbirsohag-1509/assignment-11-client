@@ -3,6 +3,7 @@ import { FaUsers, FaGraduationCap, FaFileAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import dashboardImage from "../../../assets/dass.jpg";
 
+
 const DashboardHome = () => {
   const stats = [
     {
@@ -27,6 +28,9 @@ const DashboardHome = () => {
 
   return (
     <div className="p-4 sm:p-6 md:p-10 space-y-8">
+      <title> 
+        Dashboard Home | ScholarStream
+      </title>
       {/* Header */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-center md:text-left">

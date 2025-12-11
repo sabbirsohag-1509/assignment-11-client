@@ -92,6 +92,9 @@ const ManageUsers = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+      <title> 
+        Dashboard - Manage Users
+      </title>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">
           Manage Users ({users.length})

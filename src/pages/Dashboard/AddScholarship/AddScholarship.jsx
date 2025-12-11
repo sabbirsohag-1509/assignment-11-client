@@ -72,6 +72,9 @@ const AddScholarship = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+      <title> 
+        Dashboard - Add Scholarship
+      </title>
       <h2 className="text-2xl font-semibold mb-4">Add Scholarship</h2>
 
       <form onSubmit={handleSubmit(handleAddBtn)} className="space-y-4">
