@@ -136,10 +136,10 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/login" className="btn btn-outline">
-               Students Login
+               Login
               </Link>
               <Link to="/register" className="btn btn-primary ml-2">
-               Students SignUp
+               SignUp
               </Link>
             </>
           )}

@@ -1,19 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
 import { HiReceiptPercent } from "react-icons/hi2";
 import LoadingSpinner from "./../../../components/LoadingSpinner/LoadingSpinner";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const Scholarships = () => {
-  const axiosSecure = useAxiosSecure();
 
   const { data: scholarships = [], isLoading } = useQuery({
     queryKey: ["scholarships"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/scholarships");
+      const res = await axios.get("http://localhost:3000/scholarships");
       return res.data;
     },
   });

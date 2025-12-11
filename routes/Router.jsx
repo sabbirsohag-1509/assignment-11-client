@@ -43,11 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/scholarshipDetails/:id",
-        element: <PrivateRoute><ScholarshipDetails></ScholarshipDetails></PrivateRoute>,
+        element:<ScholarshipDetails></ScholarshipDetails>,
       },
       {
         path: "/apply-scholarship/:id",
-        Component: ApplyScholarship,
+        element:<PrivateRoute><ApplyScholarship></ApplyScholarship></PrivateRoute>,
       },
 
       {

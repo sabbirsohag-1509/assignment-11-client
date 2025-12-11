@@ -8,16 +8,16 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { GiWorld } from "react-icons/gi";
 import { TiPin } from "react-icons/ti";
+import axios from "axios";
 
 const ScholarshipDetails = () => {
   const { id } = useParams();
-  const axiosSecure = useAxiosSecure();
 
   // Fetch scholarship details
   const { data: scholarship, isLoading } = useQuery({
     queryKey: ["scholarship", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/scholarships/${id}`);
+      const res = await axios.get(`http://localhost:3000/scholarships/${id}`);
       return res.data;
     },
   });
@@ -26,10 +26,11 @@ const ScholarshipDetails = () => {
   const { data: reviews = [] } = useQuery({
     queryKey: ["reviews", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/reviews?scholarshipId=${id}`);
+      const res = await axios.get(`http://localhost:3000/reviews?scholarshipId=${id}`);
       return res.data;
     },
   });
+  
 
   if (isLoading) return <LoadingSpinner />;
 

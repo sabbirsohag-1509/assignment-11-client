@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
@@ -7,16 +6,16 @@ import { HiReceiptPercent } from "react-icons/hi2";
 import LoadingSpinner from "./../../../components/LoadingSpinner/LoadingSpinner";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import axios from "axios";
 
 const AllScholarships = () => {
-  const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // ek page e 6 scholarship
 
   const { data: scholarships = [], isLoading } = useQuery({
     queryKey: ["scholarships"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-scholarships");
+      const res = await axios.get("http://localhost:3000/all-scholarships");
       return res.data;
     },
   });
