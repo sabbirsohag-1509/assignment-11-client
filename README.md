@@ -6,10 +6,10 @@
 ScholarStream is designed to streamline the scholarship process for students while providing moderators and admins tools to manage applications, reviews, and payments securely and efficiently.
 
 
-## Live Link: 
+## Live Link: https://sparkling-sable-55715c.netlify.app
 
-## Client Repo:
-## Server Repo:
+## Client Repo: https://github.com/sabbirsohag-1509/assignment-11-client
+## Server Repo: https://github.com/sabbirsohag-1509/assignment-11-server
 
 
 
