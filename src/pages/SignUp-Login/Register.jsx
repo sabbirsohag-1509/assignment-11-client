@@ -53,11 +53,13 @@ export default function Register() {
         photoURL: uploadedImageURL,
       };
 
-      await axios.post("http://localhost:3000/users", userInfo).then((res) => {
-        if (res.data.insertedId) {
-          console.log("User info saved to database:", res.data);
-        }
-      });
+      await axios
+        .post("https://scholarstream-ecru.vercel.app/users", userInfo)
+        .then((res) => {
+          if (res.data.insertedId) {
+            console.log("User info saved to database:", res.data);
+          }
+        });
 
       // Update Firebase profile
       await updateUserProfileInfo({
@@ -105,7 +107,7 @@ export default function Register() {
 
         // Save to DB only if user does NOT exist
         await axios
-          .post("http://localhost:3000/users", userInfo)
+          .post("https://scholarstream-ecru.vercel.app/users", userInfo)
           .then((dbRes) => {
             if (dbRes.data.insertedId) {
               console.log("New Google user added to DB:", dbRes.data);

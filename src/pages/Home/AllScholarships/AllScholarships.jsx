@@ -18,7 +18,7 @@ const AllScholarships = () => {
     queryKey: ["scholarships", searchText, category],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/all-scholarships?search=${searchText}&category=${category}`
+        `https://scholarstream-ecru.vercel.app/all-scholarships?search=${searchText}&category=${category}`
       );
       return res.data;
     },
@@ -35,7 +35,7 @@ const AllScholarships = () => {
 
   return (
     <div>
-      <title> 
+      <title>
         All Scholarships - Explore Comprehensive Opportunities for Your Future
       </title>
       <div className="flex flex-col md:flex-row justify-between items-center mt-10 px-4">

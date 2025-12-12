@@ -11,7 +11,9 @@ const Scholarships = () => {
   const { data: scholarships = [], isLoading } = useQuery({
     queryKey: ["scholarships"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:3000/scholarships");
+      const res = await axios.get(
+        "https://scholarstream-ecru.vercel.app/scholarships"
+      );
       return res.data;
     },
   });
@@ -25,7 +27,7 @@ const Scholarships = () => {
 
   return (
     <div>
-      <title> 
+      <title>
         Featured Scholarships - Explore Top Opportunities for Your Future
       </title>
       {/* title  */}

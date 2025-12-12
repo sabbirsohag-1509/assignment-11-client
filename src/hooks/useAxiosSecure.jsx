@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://scholarstream-ecru.vercel.app",
 });
 
 const useAxiosSecure = () => {
-  const { user,logOutInfo } = useAuth();
+  const { user, logOutInfo } = useAuth();
 
   useEffect(() => {
     //interceptor for request
@@ -31,15 +31,13 @@ const useAxiosSecure = () => {
           logOutInfo();
         }
         return Promise.reject(error);
-
       }
     );
     return () => {
       axiosSecure.interceptors.request.eject(reqInterceptor);
       axiosSecure.interceptors.response.eject(resInterceptor);
     };
-
-  }, [user,logOutInfo]);
+  }, [user, logOutInfo]);
 
   return axiosSecure;
 };

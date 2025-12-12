@@ -47,49 +47,50 @@ const LogIn = () => {
   };
 
   //google sign in handler
-const googleSignInHandler = async () => {
-  try {
-    const res = await loginInGoogle();
-    const user = res.user;
+  const googleSignInHandler = async () => {
+    try {
+      const res = await loginInGoogle();
+      const user = res.user;
 
-    // Prepare user info for DB
-    const userInfo = {
-      displayName: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL,
-    };
+      // Prepare user info for DB
+      const userInfo = {
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+      };
 
-    // Save to DB (only insert if new user)
-    await axios.post("http://localhost:3000/users", userInfo)
-      .then((dbRes) => {
-        if (dbRes.data.insertedId) {
-          console.log("New Google user added to DB:", dbRes.data);
-        } else {
-          console.log("Google user already exists in DB, skipped insert");
-        }
+      // Save to DB (only insert if new user)
+      await axios
+        .post("https://scholarstream-ecru.vercel.app/users", userInfo)
+        .then((dbRes) => {
+          if (dbRes.data.insertedId) {
+            console.log("New Google user added to DB:", dbRes.data);
+          } else {
+            console.log("Google user already exists in DB, skipped insert");
+          }
+        });
+
+      // Update global user state
+      setUser(userInfo);
+
+      Swal.fire({
+        icon: "success",
+        title: "Google Sign-In Successful!",
+        text: `Welcome, ${user.displayName}!`,
+        timer: 1500,
+        showConfirmButton: false,
       });
 
-    // Update global user state
-    setUser(userInfo);
-
-    Swal.fire({
-      icon: "success",
-      title: "Google Sign-In Successful!",
-      text: `Welcome, ${user.displayName}!`,
-      timer: 1500,
-      showConfirmButton: false,
-    });
-
-    navigate(location.state || "/");
-  } catch (error) {
-    console.error("Google Sign-In Error:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Google Sign-In Failed!",
-      text: error.message || "Something went wrong during Google sign-in.",
-    });
-  }
-};
+      navigate(location.state || "/");
+    } catch (error) {
+      console.error("Google Sign-In Error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Google Sign-In Failed!",
+        text: error.message || "Something went wrong during Google sign-in.",
+      });
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 p-4">
@@ -97,16 +98,18 @@ const googleSignInHandler = async () => {
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-2 tracking-wide">
           Welcome Back
         </h1>
-        
+
         <p className="text-center text-gray-500 mb-8">
-        Login to access your scholarship dashboard
-      </p>
+          Login to access your scholarship dashboard
+        </p>
 
         <form onSubmit={handleSubmit(loginHandler)} className="space-y-5">
           <fieldset className="space-y-5">
             {/* Email */}
             <div className="flex flex-col gap-1">
-              <label className="font-semibold text-gray-700">Email or Phone</label>
+              <label className="font-semibold text-gray-700">
+                Email or Phone
+              </label>
               <input
                 type="email"
                 {...register("email", { required: true })}

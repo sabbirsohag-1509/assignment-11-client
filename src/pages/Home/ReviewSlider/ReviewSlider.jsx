@@ -11,7 +11,9 @@ const ReviewSlider = () => {
   const { data: reviews, isLoading } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:3000/all-reviews-home");
+      const res = await axios.get(
+        "https://scholarstream-ecru.vercel.app/all-reviews-home"
+      );
       return res.data;
     },
   });

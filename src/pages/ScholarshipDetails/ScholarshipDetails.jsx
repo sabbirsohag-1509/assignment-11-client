@@ -17,7 +17,9 @@ const ScholarshipDetails = () => {
   const { data: scholarship, isLoading } = useQuery({
     queryKey: ["scholarship", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/scholarships/${id}`);
+      const res = await axios.get(
+        `https://scholarstream-ecru.vercel.app/scholarships/${id}`
+      );
       return res.data;
     },
   });
@@ -26,11 +28,12 @@ const ScholarshipDetails = () => {
   const { data: reviews = [] } = useQuery({
     queryKey: ["reviews", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/reviews?scholarshipId=${id}`);
+      const res = await axios.get(
+        `https://scholarstream-ecru.vercel.app/reviews?scholarshipId=${id}`
+      );
       return res.data;
     },
   });
-  
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -49,7 +52,6 @@ const ScholarshipDetails = () => {
           </h1>
 
           <div className="flex flex-wrap gap-4 text-gray-700">
-
             <span className="flex items-center gap-2">
               <MdCategory className="text-blue-600" />
               <span className="font-medium">
@@ -58,9 +60,7 @@ const ScholarshipDetails = () => {
             </span>
             <span className="flex items-center gap-2">
               <FaUserGraduate className="text-blue-600" />
-              <span className="font-medium">
-                {scholarship.degree}
-              </span>
+              <span className="font-medium">{scholarship.degree}</span>
             </span>
 
             <span className="flex items-center gap-2">
@@ -74,7 +74,8 @@ const ScholarshipDetails = () => {
             </span>
 
             <span className="flex items-center gap-2">
-              <GiWorld size={16} className="text-green-600"/> World Rank: <b>{scholarship.universityWorldRank}</b>
+              <GiWorld size={16} className="text-green-600" /> World Rank:{" "}
+              <b>{scholarship.universityWorldRank}</b>
             </span>
           </div>
 
@@ -97,7 +98,9 @@ const ScholarshipDetails = () => {
           {/* stipend Section */}
           {scholarship.stipend && (
             <div className="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h3 className="font-bold text-lg mb-2 flex items-center"><TiPin size={24} className="text-primary"/> Stipend :</h3>
+              <h3 className="font-bold text-lg mb-2 flex items-center">
+                <TiPin size={24} className="text-primary" /> Stipend :
+              </h3>
               <p className="text-gray-700">{scholarship.stipend}</p>
             </div>
           )}
@@ -118,7 +121,9 @@ const ScholarshipDetails = () => {
         <h2 className="text-2xl font-bold mb-4">Reviews ({reviews.length})</h2>
 
         {reviews.length === 0 && (
-          <p className="text-gray-500">No reviews available for this scholarship.</p>
+          <p className="text-gray-500">
+            No reviews available for this scholarship.
+          </p>
         )}
 
         <div className="space-y-5">
