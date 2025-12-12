@@ -51,9 +51,7 @@ const DashboardLayout = () => {
   };
   return (
     <div className="drawer lg:drawer-open bg-base-200 min-h-screen">
-      <title> 
-        Dashboard | ScholarStream
-      </title>
+      <title>Dashboard | ScholarStream</title>
       <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
 
       {/* MAIN CONTENT */}
@@ -84,16 +82,26 @@ const DashboardLayout = () => {
               <h1 className="text-lg font-semibold">Dashboard</h1>
             </div>
             <div>
-              <div className="flex items-center gap-3">
-                <div className="text-right text-sm">
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+                {/* TEXT */}
+                <div className="text-right text-xs sm:text-sm md:text-base leading-tight">
                   <span className="font-medium">Hello, </span>
-                  <span className="font-semibold">{user.displayName}</span> <br />
-                  <span className="font-bold text-primary">{role} </span>
+                  <span className="font-semibold">{user.displayName}</span>
+                  <br />
+                  <span className="font-bold text-primary">{role}</span>
                 </div>
+
+                {/* AVATAR */}
                 <img
-                  className="w-10 h-10 rounded-full bg-primary"
+                  className="
+      rounded-full bg-primary 
+      w-8 h-8 
+      sm:w-10 sm:h-10 
+      md:w-12 md:h-12
+      object-cover
+    "
                   src={user.photoURL}
-                  alt=""
+                  alt="User Avatar"
                 />
               </div>
             </div>

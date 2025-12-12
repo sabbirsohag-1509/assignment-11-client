@@ -134,14 +134,21 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <>
-              <Link to="/login" className="btn btn-sm btn-outline">
-               Login
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5">
+              <Link
+                to="/login"
+                className="btn btn-xs btn-outline w-full sm:w-auto px-3 py-1 text-[11px]"
+              >
+                Login
               </Link>
-              <Link to="/register" className="btn btn-sm btn-primary ml-2">
-               SignUp
+
+              <Link
+                to="/register"
+                className="btn btn-xs btn-primary w-full sm:w-auto px-3 py-1 text-[11px]"
+              >
+                SignUp
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

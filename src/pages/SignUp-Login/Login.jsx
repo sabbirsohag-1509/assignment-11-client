@@ -151,7 +151,7 @@ const googleSignInHandler = async () => {
             <button
               onClick={googleSignInHandler}
               type="button"
-              className="btn btn-outline  w-full rounded-xl flex items-center justify-center gap-3 py-2 text-[16px] shadow-sm"
+              className="btn btn-outline  w-full rounded-xl flex items-center justify-center gap-3 py-2 shadow-sm"
             >
               <FcGoogle className="text-2xl" />
               Continue with Google

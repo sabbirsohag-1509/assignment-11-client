@@ -232,7 +232,7 @@ export default function Register() {
             <button
               onClick={googleSignInHandler}
               type="button"
-              className="btn btn-outline w-full rounded-xl flex gap-3 items-center justify-center py-2 text-[16px] shadow-sm"
+              className="btn btn-outline w-full rounded-xl flex gap-3 items-center justify-center py-2 shadow-sm"
             >
               <FcGoogle className="text-2xl" /> Continue with Google
             </button>
