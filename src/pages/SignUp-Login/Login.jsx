@@ -94,9 +94,13 @@ const googleSignInHandler = async () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 p-4">
       <div className="bg-white shadow-2xl rounded-3xl w-full max-w-md p-10 border border-gray-200">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8 tracking-wide">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-2 tracking-wide">
           Welcome Back
         </h1>
+        
+        <p className="text-center text-gray-500 mb-8">
+        Login to access your scholarship dashboard
+      </p>
 
         <form onSubmit={handleSubmit(loginHandler)} className="space-y-5">
           <fieldset className="space-y-5">
@@ -137,7 +141,7 @@ const googleSignInHandler = async () => {
             </div>
 
             {/* Log In Button */}
-            <button className="btn btn-neutral w-full rounded-xl py-2 text-[16px] shadow-md">
+            <button className="btn btn-neutral bg-primary w-full rounded-xl py-2 text-[16px] shadow-md">
               Log In
             </button>
 
@@ -147,7 +151,7 @@ const googleSignInHandler = async () => {
             <button
               onClick={googleSignInHandler}
               type="button"
-              className="btn btn-outline w-full rounded-xl flex items-center justify-center gap-3 py-2 text-[16px] shadow-sm"
+              className="btn btn-outline  w-full rounded-xl flex items-center justify-center gap-3 py-2 text-[16px] shadow-sm"
             >
               <FcGoogle className="text-2xl" />
               Continue with Google

@@ -222,7 +222,7 @@ export default function Register() {
             </div>
 
             {/* Register Button */}
-            <button className="btn btn-neutral w-full rounded-xl py-2 text-[16px] shadow-md">
+            <button className="btn btn-neutral bg-primary w-full rounded-xl py-2 text-[16px] shadow-md">
               Register
             </button>
 
