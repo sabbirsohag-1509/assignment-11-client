@@ -24,9 +24,9 @@ const ReviewSlider = () => {
   }
 
   return (
-    <div className="mt-24">
-      <div className="flex flex-col justify-center items-center mb-10">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2 text-center">
+    <div className="mt-16 sm:mt-20 md:mt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="flex flex-col justify-center items-center mb-8 sm:mb-10 md:mb-12">
+        <h2 className="text-xl md:text-2xl font-bold relative inline-block px-4 sm:px-6 py-2 text-center">
           Featured Top <span className="text-primary">Reviews</span>
           {/* Outer gradient border */}
           <span
@@ -43,25 +43,65 @@ const ReviewSlider = () => {
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={3}
+        slidesPerView={1}
         coverflowEffect={{
-          rotate: 30,
-          stretch: "50%",
-          depth: 200,
+          rotate: 8,
+          stretch: 0,
+          depth: 120,
           modifier: 1,
-          scale: 0.75,
           slideShadows: true,
         }}
         autoplay={{
-          delay: 2000,
+          delay: 1000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
-        pagination={true}
+        pagination={{
+          clickable: true,
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            coverflowEffect: {
+              rotate: 10,
+              stretch: 0,
+              depth: 150,
+              modifier: 1,
+              slideShadows: true,
+            },
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            coverflowEffect: {
+              rotate: 15,
+              stretch: 0,
+              depth: 180,
+              modifier: 1,
+              slideShadows: true,
+            },
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+            coverflowEffect: {
+              rotate: 20,
+              stretch: 0,
+              depth: 200,
+              modifier: 1,
+              slideShadows: true,
+            },
+          },
+        }}
         modules={[EffectCoverflow, Pagination, Autoplay]}
-        className="mySwiper"
+        className="mySwiper w-full py-8 sm:py-10 md:py-12"
       >
         {reviews.map((review) => (
-          <SwiperSlide key={review.id}>
+          <SwiperSlide
+            key={review.id}
+            className="flex justify-center items-center"
+          >
             <ReviewCard review={review}></ReviewCard>
           </SwiperSlide>
         ))}

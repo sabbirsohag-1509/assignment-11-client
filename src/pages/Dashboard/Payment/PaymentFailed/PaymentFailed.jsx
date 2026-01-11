@@ -22,8 +22,6 @@ const PaymentFailed = () => {
     enabled: !!applicationId,
   });
 
-
-
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="max-w-2xl mx-auto p-6 text-center">
@@ -36,7 +34,7 @@ const PaymentFailed = () => {
 
       {application ? (
         <p className="mb-2">
-          <strong>University Name:</strong> {application.universityName} <br /> 
+          <strong>University Name:</strong> {application.universityName} <br />
           <strong>Scholarship Name:</strong> {application.scholarshipName}
         </p>
       ) : (

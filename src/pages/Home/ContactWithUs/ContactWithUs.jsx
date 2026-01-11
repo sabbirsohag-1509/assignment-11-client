@@ -3,8 +3,8 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 const ContactWithUs = () => {
   return (
-    <section className="py-20 px-4 md:px-8 bg-base-200">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 px-4 md:px-8 bg-base-100">
+      <div className="max-w-7xl mx-auto">
         {/* title  */}
         <div className="text-center my-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2">
@@ -28,7 +28,7 @@ const ContactWithUs = () => {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Contact Info */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+          <div className="bg-base-100 rounded-2xl shadow-lg p-8 space-y-6">
             <h3 className="text-2xl font-semibold text-gray-800">
               Get in Touch
             </h3>
@@ -37,7 +37,7 @@ const ContactWithUs = () => {
               <Mail className="text-primary w-7 h-7" />
               <div>
                 <h4 className="font-semibold">Email</h4>
-                <p className="text-gray-600">support@scholarstream.com</p>
+                <p className="card-text-primary">support@scholarstream.com</p>
               </div>
             </div>
 
@@ -45,7 +45,7 @@ const ContactWithUs = () => {
               <Phone className="text-primary w-7 h-7" />
               <div>
                 <h4 className="font-semibold">Phone</h4>
-                <p className="text-gray-600">+880 1234 567 890</p>
+                <p className="card-text-primary">+880 1723473804</p>
               </div>
             </div>
 
@@ -53,7 +53,7 @@ const ContactWithUs = () => {
               <MapPin className="text-primary w-7 h-7" />
               <div>
                 <h4 className="font-semibold">Address</h4>
-                <p className="text-gray-600">
+                <p className="card-text-primary">
                   Dhanmondi, Dhaka - 1205, Bangladesh
                 </p>
               </div>
@@ -61,8 +61,8 @@ const ContactWithUs = () => {
           </div>
 
           {/* Contact Form */}
-          <form className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
-            <h3 className="text-2xl font-semibold text-gray-800">
+          <form className="bg-base-100 rounded-2xl shadow-lg p-8 space-y-6">
+            <h3 className="text-2xl font-semibold card-text-primary">
               Send Us a Message
             </h3>
 

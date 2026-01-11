@@ -27,6 +27,8 @@ import AdminRoute from "../src/context/PrivateRoute/AdminRoute";
 import ModeratorRoute from "../src/context/PrivateRoute/ModeratorRoute";
 import AboutUs from "../src/components/AboutUs/AboutUs";
 import Settings from "../src/pages/Dashboard/Settings/Settings";
+import Blogs from "../src/pages/Home/Blogs/Blogs";
+import ContactUs from "../src/pages/Home/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
         path: "/about-us",
         element: <AboutUs></AboutUs>,
       },
+      {
+        path: "/blogs",
+        element: <Blogs></Blogs>
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs></ContactUs>
+      }
     ],
   },
   {

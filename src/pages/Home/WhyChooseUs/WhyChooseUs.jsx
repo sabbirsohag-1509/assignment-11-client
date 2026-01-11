@@ -52,7 +52,7 @@ const WhyChooseUs = () => {
     <section className="my-20 px-4">
       {/* title  */}
       <div className="text-center my-8">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-2 relative inline-block px-6 py-2">
           Why <span className="text-primary">Choose Us?</span>
           {/* Outer gradient border */}
           <span
@@ -65,7 +65,7 @@ const WhyChooseUs = () => {
         </h2>
 
         {/* Optional: small subtitle */}
-        <p className="text-gray-400 text-sm md:text-base mt-1">
+        <p className="card-text-secondary text-sm md:text-base mt-2">
           Discover why thousands of students trust ScholarStream for finding
           verified and fully funded scholarships worldwide.
         </p>
@@ -80,7 +80,7 @@ const WhyChooseUs = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.15 }}
             viewport={{ once: true }}
-            className="p-6 bg-white rounded-xl border shadow-md hover:shadow-xl 
+            className="p-8 bg-base-100 text-gray-600 card-text-secondary rounded-xl border shadow-md hover:shadow-xl 
                        transition-all duration-300 group relative overflow-hidden"
           >
             {/* Icon */}
@@ -92,7 +92,7 @@ const WhyChooseUs = () => {
             </h3>
 
             {/* Description */}
-            <p className="text-gray-600 leading-relaxed">{f.desc}</p>
+            <p className="text-gray-600 card-text-secondary leading-relaxed">{f.desc}</p>
 
             {/* Gradient Hover Effect */}
             <span

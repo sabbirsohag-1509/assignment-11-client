@@ -88,10 +88,10 @@ const ApplyScholarship = () => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-3xl mx-auto p-6 bg-base-100 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Apply for Scholarship</h2>
 
-      <div className="mb-6 p-4 bg-gray-100 rounded">
+      <div className="mb-6 p-4 bg-base-100 rounded">
         <h3 className="font-semibold">{scholarship.scholarshipName}</h3>
         <p>
           <strong>University:</strong> {scholarship.universityName}

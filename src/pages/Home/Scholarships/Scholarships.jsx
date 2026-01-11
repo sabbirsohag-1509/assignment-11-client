@@ -4,7 +4,6 @@ import { FaMapMarkerAlt, FaUserGraduate } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
 import { HiReceiptPercent } from "react-icons/hi2";
 import LoadingSpinner from "./../../../components/LoadingSpinner/LoadingSpinner";
-import { motion } from "framer-motion";
 import axios from "axios";
 
 const Scholarships = () => {
@@ -32,88 +31,84 @@ const Scholarships = () => {
       </title>
       {/* title  */}
       <div className="text-center my-8">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-2 relative inline-block px-6 py-2 card-text">
           Featured <span className="text-primary">Scholarships</span>
           {/* Outer gradient border */}
           <span
             className="absolute inset-0 rounded-lg pointer-events-none -z-10 
-                     bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-600 
+                     bg-linear-to-r from-pink-400 via-purple-400 to-indigo-600 
                      opacity-30"
           ></span>
           {/* Inner subtle border */}
-          <span className="absolute inset-[4px] border-2 border-white/30 rounded-lg pointer-events-none -z-10"></span>
+          <span className="absolute inset-1 border-2 border-white/30 rounded-lg pointer-events-none -z-10"></span>
         </h2>
 
         {/* Optional: small subtitle */}
-        <p className="text-gray-400 text-sm md:text-base mt-1">
+        <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mt-1">
           Explore top scholarships selected just for you
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10 px-2 md:px-0">
         {scholarships.map((item) => (
-          <motion.div
+          <div
             key={item._id}
-            className="bg-white rounded-xl shadow-lg border"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0px 15px 25px rgba(0,0,0,0.2)",
-            }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-white dark:bg-base-200 rounded-lg shadow-sm overflow-hidden transition-all duration-200 h-96 flex flex-col hover:shadow-xl hover:-translate-y-2"
           >
             {/* Image */}
             <img
               src={item.universityImage}
               alt={item.universityName}
-              className="h-48 w-full object-cover rounded-t-xl"
+              className="h-40 w-full object-cover shrink-0"
             />
 
-            {/* Body */}
-            <div className="p-5 space-y-3">
+            {/* Body - Flex grow to push button to bottom */}
+            <div className="p-4 space-y-2 flex-1 flex flex-col">
               {/* University & Category */}
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-base font-bold card-text line-clamp-2">
                 {item.universityName}
               </h2>
 
-              <div className="text-sm flex justify-between items-center gap-2 text-gray-600">
-                <span className="font-medium flex items-center gap-1">
-                  <MdCategory className="text-blue-600" />
+              <div className="text-xs flex justify-between items-center gap-2 card-text-secondary font-semibold">
+                <span className="font-bold flex items-center gap-1 truncate">
+                  <MdCategory className="text-blue-700 dark:text-blue-400 shrink-0" />
                   {item.scholarshipCategory}
                 </span>
-                <span className="font-medium flex items-center gap-1">
-                  <FaUserGraduate className="text-blue-600" />
+                <span className="font-bold flex items-center gap-1 shrink-0">
+                  <FaUserGraduate className="text-blue-700 dark:text-blue-400" />
                   {item.degree}
                 </span>
               </div>
 
               {/* Location */}
-              <div className="flex items-center gap-2 text-gray-600">
-                <FaMapMarkerAlt className="text-red-500" />
-                <span>
+              <div className="flex items-center gap-2 text-xs card-text-secondary font-semibold">
+                <FaMapMarkerAlt className="text-red-600 dark:text-red-400 shrink-0" />
+                <span className="line-clamp-1">
                   {item.universityCity}, {item.universityCountry}
                 </span>
               </div>
 
               {/* Application Fees */}
-              <div className="flex items-center gap-2 text-gray-700">
-                <HiReceiptPercent className="text-green-600 text-xl" />
-                <p className="font-medium">
-                  Application Fees:{" "}
+              <div className="flex items-center gap-2 text-xs card-text font-semibold">
+                <HiReceiptPercent className="text-green-700 dark:text-green-400 text-base shrink-0" />
+                <p className="font-bold">
+                 Application Fees:{" "}
                   {item.applicationFees ? `$${item.applicationFees}` : "N/A"}
                 </p>
               </div>
 
+              {/* Spacer to push button to bottom */}
+              <div className="flex-1"></div>
+
               {/* View Details */}
               <Link
                 to={`/scholarshipDetails/${item._id}`}
-                className="btn btn-primary w-full mt-3 rounded-lg"
+                className="btn btn-primary btn-sm w-full rounded-md text-xs shrink-0"
               >
                 View Details
               </Link>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

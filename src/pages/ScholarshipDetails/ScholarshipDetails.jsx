@@ -40,18 +40,18 @@ const ScholarshipDetails = () => {
   return (
     <div className="my-10 container mx-auto px-4">
       {/* Header Section */}
-      <div className="bg-white shadow-lg rounded-xl overflow-hidden">
+      <div className="bg-base-100 shadow-lg rounded-xl overflow-hidden">
         <img
           src={scholarship.universityImage}
           className="w-full h-[300px] object-cover"
         />
 
         <div className="p-6 space-y-4">
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h1 className="text-3xl font-bold card-text-primary">
             🎓 {scholarship.scholarshipName}
           </h1>
 
-          <div className="flex flex-wrap gap-4 text-gray-700">
+          <div className="flex flex-wrap gap-4 card-text-primary">
             <span className="flex items-center gap-2">
               <MdCategory className="text-blue-600" />
               <span className="font-medium">
@@ -80,7 +80,7 @@ const ScholarshipDetails = () => {
           </div>
 
           {/* Fees */}
-          <div className="flex items-center gap-3 text-gray-800">
+          <div className="flex items-center gap-3 card-text-primary">
             <HiReceiptPercent className="text-green-600 text-2xl" />
             <span className="font-medium">
               Application Fees:{" "}
@@ -91,17 +91,17 @@ const ScholarshipDetails = () => {
           </div>
 
           {/* Description */}
-          <p className="mt-4 text-gray-600 leading-relaxed">
+          <p className="mt-4 card-text-primary leading-relaxed">
             {scholarship.description || "No description available."}
           </p>
 
           {/* stipend Section */}
           {scholarship.stipend && (
-            <div className="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="mt-5 p-4 bg-base-100 border border-blue-200 rounded-lg">
               <h3 className="font-bold text-lg mb-2 flex items-center">
                 <TiPin size={24} className="text-primary" /> Stipend :
               </h3>
-              <p className="text-gray-700">{scholarship.stipend}</p>
+              <p className="card-text-primary">{scholarship.stipend}</p>
             </div>
           )}
 
@@ -121,7 +121,7 @@ const ScholarshipDetails = () => {
         <h2 className="text-2xl font-bold mb-4">Reviews ({reviews.length})</h2>
 
         {reviews.length === 0 && (
-          <p className="text-gray-500">
+          <p className="card-text-primary">
             No reviews available for this scholarship.
           </p>
         )}
@@ -130,7 +130,7 @@ const ScholarshipDetails = () => {
           {reviews.map((review) => (
             <div
               key={review._id}
-              className="bg-white p-4 rounded-xl shadow-md border"
+              className="bg-base-100 p-4 rounded-xl shadow-md border"
             >
               <div className="flex items-center gap-3 mb-2">
                 <img
@@ -138,8 +138,8 @@ const ScholarshipDetails = () => {
                   className="w-12 h-12 rounded-full border"
                 />
                 <div>
-                  <h4 className="font-bold text-gray-800">{review.userName}</h4>
-                  <p className="text-sm text-gray-500">{review.reviewDate}</p>
+                  <h4 className="font-bold card-text-primary">{review.userName}</h4>
+                  <p className="text-sm card-text-secondary">{review.reviewDate}</p>
                 </div>
               </div>
 
@@ -148,7 +148,7 @@ const ScholarshipDetails = () => {
                 {"⭐".repeat(review.ratingPoint)}
               </div>
 
-              <p className="text-gray-700">{review.reviewComment}</p>
+              <p className="card-text-primary">{review.reviewComment}</p>
             </div>
           ))}
         </div>

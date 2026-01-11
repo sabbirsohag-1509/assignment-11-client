@@ -1,17 +1,113 @@
 @import "tailwindcss";
-@plugin "daisyui"{ 
-    themes: light --default;
+@plugin "daisyui";
+
+@theme {
+  --color-primary: #7f5bff;
+  --color-secondary: #00c6ff;
 }
 
-@plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  --color-primary: #7F5BFF;
-  --color-secondary: #00C6FF;
+[data-theme="light"] {
+  color-scheme: light;
+  --color-primary: #7f5bff;
+  --color-secondary: #00c6ff;
+  --color-primary-content: #ffffff;
+  --color-base-100: #ffffff;
+  --color-base-200: #f3f4f6;
+  --color-base-300: #d1d5db;
+  --color-base-content: #1f2937;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-primary: #7f5bff;
+  --color-secondary: #00c6ff;
+  --color-primary-content: #ffffff;
+  --color-base-100: #1f2937;
+  --color-base-200: #111827;
+  --color-base-300: #0f172a;
+  --color-base-content: #f3f4f6;
 }
 
 body {
   font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Banner Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-bounce {
+  animation: bounce-slow 2s infinite;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Force scholarship card text colors based on theme */
+[data-theme="light"] .card-text {
+  color: #374151 !important;
+}
+
+[data-theme="light"] .card-text-secondary {
+  color: #6b7280 !important;
+}
+
+[data-theme="dark"] .card-text {
+  color: #d1d5dbe8 !important;
+}
+
+[data-theme="dark"] .card-text-secondary {
+  color: #d1d5dbe8 !important;
+}
+
+[data-theme="dark"] .card-text-secondary {
+  color: #d1d5dbe8 !important;
+}
+
+/* Preserve text colors on hover */
+[data-theme="light"] .card-text:hover,
+[data-theme="light"] .card-text:active {
+  color: #000000 !important;
+}
+
+[data-theme="light"] .card-text-secondary:hover,
+[data-theme="light"] .card-text-secondary:active {
+  color: #000000 !important;
+}
+
+[data-theme="dark"] .card-text:hover,
+[data-theme="dark"] .card-text:active {
+  color: #d1d5dbe8 !important;
+}
+
+[data-theme="dark"] .card-text-secondary:hover,
+[data-theme="dark"] .card-text-secondary:active {
+  color: #d1d5dbe8 !important;
 }

@@ -57,7 +57,7 @@ const Testimonials = () => {
     <section className="my-20 px-4">
       {/* title  */}
       <div className="text-center my-8">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 relative inline-block px-6 py-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-2 relative inline-block px-6 py-2">
           Success <span className="text-primary">Stories</span>
           {/* Outer gradient border */}
           <span
@@ -79,21 +79,21 @@ const Testimonials = () => {
             transition={{ duration: 0.7, delay: i * 0.15 }}
             viewport={{ once: false, amount: 0.2 }}
             whileHover={{ scale: 1.05, rotateX: 3, rotateY: 3 }}
-            className="p-6 rounded-xl shadow-2xl border border-white/20 backdrop-blur-md bg-white/20 hover:bg-white/30 cursor-pointer"
+            className="p-6 rounded-xl shadow-2xl border border-base-300 bg-base-100 hover:shadow-lg hover:border-primary/50 transition-all duration-300 cursor-pointer"
           >
             <FaQuoteLeft className="text-3xl text-primary mb-4" />
-            <p className="text-gray-600 mb-4 text-sm md:text-base">
+            <p className="card-text mb-4 text-sm md:text-base leading-relaxed">
               {r.comment}
             </p>
             <div className="flex items-center gap-4 mt-4">
               <img
                 src={r.img}
-                className="w-14 h-14 rounded-full object-cover border-2 border-white/50"
+                className="w-14 h-14 rounded-full object-cover border-2 border-primary/30 dark:border-primary/50 "
                 alt={r.name}
               />
               <div>
-                <h4 className="font-semibold text-gray-700">{r.name}</h4>
-                <p className="text-gray-600 text-sm">{r.role}</p>
+                <h4 className="font-semibold card-text">{r.name}</h4>
+                <p className="card-text-secondary text-sm">{r.role}</p>
               </div>
             </div>
           </motion.div>
