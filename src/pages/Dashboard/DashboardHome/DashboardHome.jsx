@@ -34,10 +34,10 @@ const DashboardHome = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-center md:text-left">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold card-text-primary">
             Welcome to <span className="text-primary">Dashboard</span>
           </h1>
-          <p className="text-gray-500 mt-2 text-sm sm:text-base md:text-sm">
+          <p className="card-text-primary mt-2 text-sm sm:text-base md:text-sm">
             ScholarStream empowers Students, Moderators, and Admins with seamless scholarship management, real-time analytics, and smooth application workflows for academic success.
           </p>
         </div>
@@ -63,20 +63,20 @@ const DashboardHome = () => {
           >
             <div className="p-4 bg-white/20 rounded-full">{stat.icon}</div>
             <div>
-              <p className="text-white/90 font-medium text-sm sm:text-base">{stat.title}</p>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stat.value}</h2>
+              <p className="card-text-primary font-medium text-sm sm:text-base">{stat.title}</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold card-text-primary">{stat.value}</h2>
             </div>
           </motion.div>
         ))}
       </div>
 
       {/* Info Section */}
-      <div className="bg-white rounded-xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
+      <div className="bg-base-100 rounded-xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
         <div className="md:w-2/3 space-y-4">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold card-text-primary">
             Quick Overview
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base md:text-base">
+          <p className="card-text-primary text-sm sm:text-base md:text-base">
             This dashboard provides a bird's-eye view of all key statistics, including total users, scholarships, and applications. Use the sidebar to navigate to specific sections for managing content or reviewing applications efficiently.
           </p>
         </div>

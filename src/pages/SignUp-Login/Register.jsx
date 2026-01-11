@@ -116,6 +116,8 @@ export default function Register() {
             }
           });
 
+        // Note: No need to manually setUser - Firebase onAuthStateChanged will handle it
+
         Swal.fire({
           icon: "success",
           title: "Google Sign-In Successful!",
@@ -124,7 +126,10 @@ export default function Register() {
           showConfirmButton: false,
         });
 
-        navigate(location.state || "/");
+        // Navigate after a small delay to ensure auth state is updated
+        setTimeout(() => {
+          navigate(location.state || "/");
+        }, 100);
       })
       .catch((error) => {
         console.error("Google Sign-In Error:", error);
@@ -138,21 +143,26 @@ export default function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 p-4">
-      <div className="bg-white shadow-2xl rounded-3xl w-full max-w-md p-10 border border-gray-200">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8 tracking-wide">
+    <div className="flex justify-center items-center min-h-screen bg-base-200 p-4">
+      <div className="bg-base-100 shadow-2xl rounded-3xl w-full max-w-md p-8 sm:p-10 border border-base-300">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center card-text-primary mb-2 tracking-wide">
           Create Account
         </h1>
+        <p className="text-center card-text-secondary mb-8 text-sm sm:text-base">
+          Join us to access scholarship opportunities
+        </p>
 
         <form onSubmit={handleSubmit(registerBtnHandler)} className="space-y-5">
           <fieldset className="space-y-5">
             {/* Name */}
             <div className="flex flex-col gap-1">
-              <label className="font-semibold text-gray-700">Your Name</label>
+              <label className="font-semibold card-text-primary">
+                Your Name
+              </label>
               <input
                 type="text"
                 {...register("name", { required: true })}
-                className="input input-bordered w-full rounded-xl"
+                className="input input-bordered w-full rounded-xl bg-base-100 card-text-primary"
                 placeholder="Your Name"
               />
               {errors.name && (
@@ -162,25 +172,25 @@ export default function Register() {
 
             {/* Photo URL */}
             <div className="flex flex-col gap-1">
-              <label className="font-semibold text-gray-700">
+              <label className="font-semibold card-text-primary">
                 Profile Photo
               </label>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full rounded-xl"
+                className="file-input file-input-bordered w-full rounded-xl bg-base-100 card-text-primary"
                 {...register("photoURL", { required: true })}
               />
             </div>
 
             {/* Email */}
             <div className="flex flex-col gap-1">
-              <label className="font-semibold text-gray-700">
+              <label className="font-semibold card-text-primary">
                 Email or Phone
               </label>
               <input
                 type="email"
                 {...register("email", { required: true })}
-                className="input input-bordered w-full rounded-xl"
+                className="input input-bordered w-full rounded-xl bg-base-100 card-text-primary"
                 placeholder="Email"
               />
               {errors.email && (
@@ -190,10 +200,12 @@ export default function Register() {
 
             {/* Password */}
             <div className="flex flex-col gap-1 relative">
-              <label className="font-semibold text-gray-700">Password</label>
+              <label className="font-semibold card-text-primary">
+                Password
+              </label>
               <input
                 type={showPassword ? "text" : "password"}
-                className="input input-bordered w-full rounded-xl pr-12"
+                className="input input-bordered w-full rounded-xl pr-12 bg-base-100 card-text-primary"
                 placeholder="Password"
                 {...register("password", {
                   required: true,
@@ -202,7 +214,7 @@ export default function Register() {
                 })}
               />
               <span
-                className="absolute top-10 right-3 cursor-pointer text-gray-600 text-lg"
+                className="absolute top-10 right-3 cursor-pointer card-text-secondary text-lg hover:card-text-primary transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
@@ -224,28 +236,28 @@ export default function Register() {
             </div>
 
             {/* Register Button */}
-            <button className="btn btn-neutral bg-primary w-full rounded-xl py-2 text-[16px] shadow-md">
+            <button className="btn btn-primary w-full rounded-xl py-2 text-[16px] shadow-md hover:btn-primary/90 transition-all">
               Register
             </button>
 
-            <div className="divider text-gray-500">OR</div>
+            <div className="divider card-text-secondary">OR</div>
 
             {/* Google Sign In */}
             <button
               onClick={googleSignInHandler}
               type="button"
-              className="btn btn-outline w-full rounded-xl flex gap-3 items-center justify-center py-2 shadow-sm"
+              className="btn btn-outline w-full rounded-xl flex gap-3 items-center justify-center py-2 shadow-sm hover:bg-base-200 transition-all"
             >
               <FcGoogle className="text-2xl" /> Continue with Google
             </button>
           </fieldset>
         </form>
-        <p className="text-gray-600 text-sm p-1">
+        <p className="card-text-secondary text-sm p-1 mt-4 text-center">
           Already have an account?{" "}
           <Link
             state={location.state}
             to="/login"
-            className="text-blue-600 font-semibold"
+            className="text-primary font-semibold hover:underline"
           >
             login
           </Link>{" "}

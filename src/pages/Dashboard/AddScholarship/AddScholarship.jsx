@@ -71,7 +71,7 @@ const AddScholarship = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-3xl mx-auto p-6 bg-base-100 rounded-lg shadow-md">
       <title> 
         Dashboard - Add Scholarship
       </title>

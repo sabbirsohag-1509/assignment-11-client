@@ -10,10 +10,13 @@ import { FaAppStore, FaChartLine, FaRegCommentDots } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
 import { FaUsersGear } from "react-icons/fa6";
 import useRole from "../../hooks/useRole";
+import useTheme from "../../hooks/useTheme";
+import { MdLightMode, MdDarkMode } from "react-icons/md";
 
 const DashboardLayout = () => {
   const { user, logOutInfo } = useAuth();
   const { role } = useRole();
+  const { isDark, toggleTheme } = useTheme();
   // console.log("Current User Role:", role);
   const linkStyle = ({ isActive }) =>
     isActive
@@ -81,7 +84,20 @@ const DashboardLayout = () => {
             <div>
               <h1 className="text-lg font-semibold">Dashboard</h1>
             </div>
-            <div>
+            <div className="flex items-center gap-3 md:gap-4">
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className="btn btn-ghost btn-circle"
+                aria-label="Toggle theme"
+              >
+                {isDark ? (
+                  <MdLightMode size={22} className="text-yellow-400" />
+                ) : (
+                  <MdDarkMode size={22} className="text-gray-700" />
+                )}
+              </button>
+
               <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
                 {/* TEXT */}
                 <div className="text-right text-xs sm:text-sm md:text-base leading-tight">

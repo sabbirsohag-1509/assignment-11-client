@@ -70,8 +70,7 @@ const LogIn = () => {
           }
         });
 
-      // Update global user state
-      setUser(userInfo);
+      // Note: No need to manually setUser - Firebase onAuthStateChanged will handle it
 
       Swal.fire({
         icon: "success",
@@ -81,7 +80,10 @@ const LogIn = () => {
         showConfirmButton: false,
       });
 
-      navigate(location.state || "/");
+      // Navigate after a small delay to ensure auth state is updated
+      setTimeout(() => {
+        navigate(location.state || "/");
+      }, 100);
     } catch (error) {
       console.error("Google Sign-In Error:", error);
       Swal.fire({
@@ -93,13 +95,13 @@ const LogIn = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 p-4">
-      <div className="bg-white shadow-2xl rounded-3xl w-full max-w-md p-10 border border-gray-200">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-2 tracking-wide">
+    <div className="flex justify-center items-center min-h-screen bg-base-200 p-4">
+      <div className="bg-base-100 shadow-2xl rounded-3xl w-full max-w-md p-8 sm:p-10 border border-base-300">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center card-text-primary mb-2 tracking-wide">
           Welcome Back
         </h1>
 
-        <p className="text-center text-gray-500 mb-8">
+        <p className="text-center card-text-secondary mb-8 text-sm sm:text-base">
           Login to access your scholarship dashboard
         </p>
 
@@ -107,13 +109,13 @@ const LogIn = () => {
           <fieldset className="space-y-5">
             {/* Email */}
             <div className="flex flex-col gap-1">
-              <label className="font-semibold text-gray-700">
+              <label className="font-semibold card-text-primary">
                 Email or Phone
               </label>
               <input
                 type="email"
                 {...register("email", { required: true })}
-                className="input input-bordered w-full rounded-xl"
+                className="input input-bordered w-full rounded-xl bg-base-100 card-text-primary"
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -123,16 +125,18 @@ const LogIn = () => {
 
             {/* Password */}
             <div className="flex flex-col gap-1 relative">
-              <label className="font-semibold text-gray-700">Password</label>
+              <label className="font-semibold card-text-primary">
+                Password
+              </label>
               <input
                 type={showPassword ? "text" : "password"}
                 {...register("password", { required: true })}
-                className="input input-bordered w-full rounded-xl pr-12"
+                className="input input-bordered w-full rounded-xl pr-12 bg-base-100 card-text-primary"
                 placeholder="Enter your password"
               />
 
               <span
-                className="absolute top-10 right-3 cursor-pointer text-gray-600 text-lg"
+                className="absolute top-10 right-3 cursor-pointer card-text-secondary text-lg hover:card-text-primary transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
@@ -144,29 +148,29 @@ const LogIn = () => {
             </div>
 
             {/* Log In Button */}
-            <button className="btn btn-neutral bg-primary w-full rounded-xl py-2 text-[16px] shadow-md">
+            <button className="btn btn-primary w-full rounded-xl py-2 text-[16px] shadow-md hover:btn-primary/90 transition-all">
               Log In
             </button>
 
-            <div className="divider text-gray-500">OR</div>
+            <div className="divider card-text-secondary">OR</div>
 
             {/* Google Login */}
             <button
               onClick={googleSignInHandler}
               type="button"
-              className="btn btn-outline  w-full rounded-xl flex items-center justify-center gap-3 py-2 shadow-sm"
+              className="btn btn-outline w-full rounded-xl flex items-center justify-center gap-3 py-2 shadow-sm hover:bg-base-200 transition-all"
             >
               <FcGoogle className="text-2xl" />
               Continue with Google
             </button>
           </fieldset>
         </form>
-        <p className="text-gray-600 text-sm p-1">
+        <p className="card-text-secondary text-sm p-1 mt-4 text-center">
           Don't have an account?{" "}
           <Link
             state={location.state}
             to="/register"
-            className="text-blue-600 font-semibold"
+            className="text-primary font-semibold hover:underline"
           >
             Sign Up
           </Link>{" "}
