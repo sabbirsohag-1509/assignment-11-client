@@ -147,6 +147,11 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/profile" className={linkStyle}>
+                    Profile
+                  </NavLink>
+                </li>
+                <li>
                   <Link to="/about-us">About Us</Link>
                 </li>
                 <div className="divider my-1"></div>

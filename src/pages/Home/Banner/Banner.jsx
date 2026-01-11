@@ -34,7 +34,6 @@ const Banner = () => {
     return () => clearInterval(timer);
   }, [autoPlay, slides.length]);
 
-
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
     setAutoPlay(false);
@@ -46,7 +45,7 @@ const Banner = () => {
   };
 
   return (
-    <section className="relative w-full h-[75vh] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden">
       {/* Image Slider */}
       <div className="absolute inset-0 w-full h-full">
         {slides.map((slide, index) => (
@@ -59,7 +58,7 @@ const Banner = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover brightness-50"
+              className="w-full h-full object-cover brightness-50 md:object-center object-top md:h-full h-[60vh] md:h-[75vh]"
             />
           </div>
         ))}

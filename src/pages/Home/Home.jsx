@@ -8,6 +8,7 @@ import UniversitySlider from "./UniversitySlider/UniversitySlider";
 import { Contact } from "lucide-react";
 import ContactWithUs from "./ContactWithUs/ContactWithUs";
 import ReviewSlider from "./ReviewSlider/ReviewSlider";
+import Statistics from "./Statistics/Statistics";
 
 const Home = () => {
   return (
@@ -26,6 +27,9 @@ const Home = () => {
       </section>
       <section>
         <WhyChooseUs></WhyChooseUs>
+      </section>
+      <section> 
+        <Statistics></Statistics>
       </section>
       <section>
         <UniversitySlider></UniversitySlider>
